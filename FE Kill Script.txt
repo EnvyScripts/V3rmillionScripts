@@ -1,0 +1,10 @@
+local plr = game.Players.Player1
+lpChar = game.Players.LocalPlayer.Character.Torso
+
+local w = Instance.new("Weld", lpChar)
+w.Part0 = lpChar
+w.Part1 = plr.Character.Torso
+w.C0 = lpChar.CFrame
+w.C1 = lpChar.CFrame * CFrame.new(0, -10000, 0)
+wait(0.1)
+w:Destroy()

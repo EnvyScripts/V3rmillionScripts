@@ -1,0 +1,6 @@
+local TwistedMurderer = {}
+for i, v in pairs(game.ReplicatedStorage.Shop:GetChildren()) do
+for i, t in pairs(v:GetChildren()) do
+t:Clone().Parent = game.Players.LocalPlayer.DATA.Backpack
+end
+end 

@@ -1,0 +1,629 @@
+local name = "xshotcobra225x"
+
+
+
+
+
+repeat wait() until #Game.Players:GetChildren(
+	) > 0
+
+local char = Game.Players:FindFirstChild(name) or (Game.Players:GetChildren(
+	)[1].Name:sub(1,6) == "Player" and Game.Players:GetChildren(
+		)[1]
+			)
+if not char then return end
+local current = Workspace
+local cp = 0
+local fontcolor = Color3.new(1,1,1)
+local bordercolor = Color3.new(1,0,0)
+local backgroundcolor = Color3.new(0,0,0)
+local backgroundtrans = .35
+local copy = nil
+local sP = {
+"Name";
+"ClassName";
+"BrickColor";
+"Position"
+}
+
+local sg = Instance.new("ScreenGui")
+sg.Parent = char.PlayerGui
+
+local ok = Instance.new("TextButton", sg)
+ok.Size = UDim2.new(.6,0,.05,0)
+ok.Position = UDim2.new(.2,0,.6,0)
+ok.FontSize = "Size18"
+ok.Text = "Accept"
+ok.TextColor3 = Color3.new(1,1,1)
+ok.Style = "RobloxButton"
+
+local fontS1 = Instance.new("Frame", sg)
+fontS1.Size = UDim2.new(.2,0,.2,0)
+fontS1.Style = "RobloxRound"
+fontS1.Position = UDim2.new(.2,0,.4,0)
+local tb1 = Instance.new("TextLabel", fontS1)
+tb1.Text = "Font Color"
+tb1.FontSize = "Size12"
+tb1.BackgroundTransparency = 1
+tb1.TextColor3 = Color3.new(1,1,1)
+tb1.Size = UDim2.new(1,0,.25,0)
+local r1 = Instance.new("TextBox", fontS1)
+r1.Position = UDim2.new(0,0,.25,0)
+r1.TextColor3 = Color3.new(1,1,1)
+r1.BackgroundTransparency = 1
+r1.Size = UDim2.new(.3,0,.25,0)
+r1.Text = "0"
+local g1 = Instance.new("TextBox", fontS1)
+g1.Position = UDim2.new(.3,0,.25,0)
+g1.TextColor3 = Color3.new(1,1,1)
+g1.BackgroundTransparency = 1
+g1.Size = UDim2.new(.3,0,.25,0)
+g1.Text = "0"
+local b1 = Instance.new("TextBox", fontS1)
+b1.Position = UDim2.new(.6,0,.25,0)
+b1.TextColor3 = Color3.new(1,1,1)
+b1.BackgroundTransparency = 1
+b1.Size = UDim2.new(.3,0,.25,0)
+b1.Text = "0"
+local prev1 = Instance.new("Frame", fontS1)
+prev1.Size = UDim2.new(1,0,.5,0)
+prev1.Position = UDim2.new(0,0,.5,0)
+prev1.BackgroundColor3 = Color3.new(0,0,0)
+prev1.BorderColor3 = Color3.new(0,0,0)
+r1.Changed:connect(function()
+	local color = tonumber(r1.Text) or 0
+	prev1.BackgroundColor3 = Color3.new(color, tonumber(g1.Text) or 0, tonumber(b1.Text) or 0)
+end)
+g1.Changed:connect(function()
+	local color = tonumber(g1.Text) or 0
+	prev1.BackgroundColor3 = Color3.new(tonumber(r1.Text) or 0, color, tonumber(b1.Text) or 0)
+end)
+b1.Changed:connect(function()
+	local color = tonumber(b1.Text) or 0
+	prev1.BackgroundColor3 = Color3.new(tonumber(r1.Text) or 0, tonumber(g1.Text) or 0, color)
+end)
+
+local FontS2 = Instance.new("Frame", sg)
+FontS2.Size = UDim2.new(.2,0,.2,0)
+FontS2.Style = "RobloxRound"
+FontS2.Position = UDim2.new(.4,0,.4,0)
+local tb2 = Instance.new("TextLabel", FontS2)
+tb2.Text = "Background Color"
+tb2.FontSize = "Size12"
+tb2.BackgroundTransparency = 1
+tb2.TextColor3 = Color3.new(1,1,1)
+tb2.Size = UDim2.new(1,0,.25,0)
+local r2 = Instance.new("TextBox", FontS2)
+r2.Position = UDim2.new(0,0,.25,0)
+r2.TextColor3 = Color3.new(1,1,1)
+r2.BackgroundTransparency = 1
+r2.Size = UDim2.new(.3,0,.25,0)
+r2.Text = "0"
+local g2 = Instance.new("TextBox", FontS2)
+g2.Position = UDim2.new(.3,0,.25,0)
+g2.TextColor3 = Color3.new(1,1,1)
+g2.BackgroundTransparency = 1
+g2.Size = UDim2.new(.3,0,.25,0)
+g2.Text = "0"
+local b2 = Instance.new("TextBox", FontS2)
+b2.Position = UDim2.new(.6,0,.25,0)
+b2.TextColor3 = Color3.new(1,1,1)
+b2.BackgroundTransparency = 1
+b2.Size = UDim2.new(.3,0,.25,0)
+b2.Text = "0"
+local prev2 = Instance.new("Frame", FontS2)
+prev2.Size = UDim2.new(1,0,.5,0)
+prev2.Position = UDim2.new(0,0,.5,0)
+prev2.BackgroundColor3 = Color3.new(0,0,0)
+prev2.BorderColor3 = Color3.new(0,0,0)
+r2.Changed:connect(function()
+	local color = tonumber(r2.Text) or 0
+	prev2.BackgroundColor3 = Color3.new(color, tonumber(g2.Text) or 0, tonumber(b2.Text) or 0)
+end)
+g2.Changed:connect(function()
+	local color = tonumber(g2.Text) or 0
+	prev2.BackgroundColor3 = Color3.new(tonumber(r2.Text) or 0, color, tonumber(b2.Text) or 0)
+end)
+b2.Changed:connect(function()
+	local color = tonumber(b2.Text) or 0
+	prev2.BackgroundColor3 = Color3.new(tonumber(r2.Text) or 0, tonumber(g2.Text) or 0, color)
+end)
+
+local fontS3 = Instance.new("Frame", sg)
+fontS3.Size = UDim2.new(.2,0,.2,0)
+fontS3.Style = "RobloxRound"
+fontS3.Position = UDim2.new(.6,0,.4,0)
+local tb3 = Instance.new("TextLabel", fontS3)
+tb3.Text = "Border Color"
+tb3.FontSize = "Size12"
+tb3.BackgroundTransparency = 1
+tb3.TextColor3 = Color3.new(1,1,1)
+tb3.Size = UDim2.new(1,0,.25,0)
+local r3 = Instance.new("TextBox", fontS3)
+r3.Position = UDim2.new(0,0,.25,0)
+r3.TextColor3 = Color3.new(1,1,1)
+r3.BackgroundTransparency = 1
+r3.Size = UDim2.new(.3,0,.25,0)
+r3.Text = "0"
+local g3 = Instance.new("TextBox", fontS3)
+g3.Position = UDim2.new(.3,0,.25,0)
+g3.TextColor3 = Color3.new(1,1,1)
+g3.BackgroundTransparency = 1
+g3.Size = UDim2.new(.3,0,.25,0)
+g3.Text = "0"
+local b3 = Instance.new("TextBox", fontS3)
+b3.Position = UDim2.new(.6,0,.25,0)
+b3.TextColor3 = Color3.new(1,1,1)
+b3.BackgroundTransparency = 1
+b3.Size = UDim2.new(.3,0,.25,0)
+b3.Text = "0"
+local prev3 = Instance.new("Frame", fontS3)
+prev3.Size = UDim2.new(1,0,.5,0)
+prev3.Position = UDim2.new(0,0,.5,0)
+prev3.BackgroundColor3 = Color3.new(0,0,0)
+prev3.BorderColor3 = Color3.new(0,0,0)
+r3.Changed:connect(function()
+	local color = tonumber(r3.Text) or 0
+	prev3.BackgroundColor3 = Color3.new(color, tonumber(g3.Text) or 0, tonumber(b3.Text) or 0)
+end)
+g3.Changed:connect(function()
+	local color = tonumber(g3.Text) or 0
+	prev3.BackgroundColor3 = Color3.new(tonumber(r3.Text) or 0, color, tonumber(b3.Text) or 0)
+end)
+b3.Changed:connect(function()
+	local color = tonumber(b3.Text) or 0
+	prev3.BackgroundColor3 = Color3.new(tonumber(r3.Text) or 0, tonumber(g3.Text) or 0, color)
+end)
+
+ok.MouseButton1Click:wait()
+
+local fontcolor = prev1.BackgroundColor3
+local backgroundcolor = prev2.BackgroundColor3
+local bordercolor = prev3.BackgroundColor3
+fontS1:Destroy()
+FontS2:Destroy()
+fontS3:Destroy()
+ok:Destroy()
+
+local fr = Instance.new("Frame", sg)
+fr.Style = "RobloxRound"
+fr.Size = UDim2.new(.35,0,.5,0)
+fr.Position = UDim2.new(0,0,.25,0)
+
+local sb = Instance.new("TextButton", sg) -- Scrollbar
+local issbDown = false
+local sblasty = nil
+sb.Size = UDim2.new(.035,0,.5,0)
+sb.Position = UDim2.new(.35,0,.25,0)
+sb.BackgroundTransparency = backgroundtrans
+sb.TextColor3 = fontcolor
+sb.BorderColor3 = bordercolor
+sb.BackgroundColor3 = backgroundcolor
+sb.Text = "="
+sb.MouseButton1Down:connect(function()
+	issbDown = true
+end)
+sb.MouseButton1Up:connect(function()
+	issbDown = false
+end)
+sb.MouseLeave:connect(function()
+	issbDown = false
+end)
+sb.MouseEnter:connect(function()
+	issbDown = false
+end)
+sb.MouseMoved:connect(function(x,y)
+	if issbDown then
+		if not sblasty then sblasty = y end
+		if sblasty - y < 0 then
+			-- moving up
+			for i,v in pairs(fr:GetChildren()) do
+				v.Position = v.Position + UDim2.new(0,0,-.05,0)
+				if v.Position.Y.Scale < .08 then
+					v.BackgroundTransparency = 1
+					v.TextButton.BackgroundTransparency = 1
+					v.TextTransparency = 1
+					v.TextButton.TextTransparency = 1
+				elseif v.Position.Y.Scale >= .95 then
+				else
+					v.BackgroundTransparency = backgroundtrans
+					v.TextButton.BackgroundTransparency = backgroundtrans
+					v.TextTransparency = 0
+					v.TextButton.TextTransparency = 0
+				end
+			end
+		else
+			-- moving down
+			for i,v in pairs(fr:GetChildren()) do
+				v.Position = v.Position + UDim2.new(0,0,.05,0)
+				if v.Position.Y.Scale >= .95 then
+					v.BackgroundTransparency = 1
+					v.TextButton.BackgroundTransparency = 1
+					v.TextTransparency = 1
+					v.TextButton.TextTransparency = 1
+				elseif v.Position.Y.Scale < .08 then
+				else
+					v.BackgroundTransparency = backgroundtrans
+					v.TextButton.BackgroundTransparency = backgroundtrans
+					v.TextTransparency = 0
+					v.TextButton.TextTransparency = 0
+				end
+			end
+		end
+	end
+	sblasty = y
+end)
+
+local work = Instance.new("TextButton", sg)
+work.Position = UDim2.new(0,0,.2,0)
+work.Size = UDim2.new(.05,0,.05,0)
+work.BackgroundTransparency = backgroundtrans
+work.TextColor3 = fontcolor
+work.BorderColor3 = bordercolor
+work.BackgroundColor3 = backgroundcolor
+work.Text = "Workspace"
+work.MouseButton1Click:connect(function()
+	current = Workspace
+	Clear()
+	GetList()
+end)
+work.MouseButton2Up:connect(function(x,y)
+	local pos = UDim2.new(0,x,0,y)
+	CreatePasteMenu(pos, Workspace)
+end)
+
+local light = Instance.new("TextButton", sg)
+light.Position = UDim2.new(0.06,0,.2,0)
+light.Size = UDim2.new(.05,0,.05,0)
+light.BackgroundTransparency = backgroundtrans
+light.TextColor3 = fontcolor
+light.BorderColor3 = bordercolor
+light.BackgroundColor3 = backgroundcolor
+light.Text = "Lighting"
+light.MouseButton1Click:connect(function()
+	current = game.Lighting
+	Clear()
+	GetList()
+end)
+light.MouseButton2Up:connect(function(x,y)
+	local pos = UDim2.new(0,x,0,y)
+	CreatePasteMenu(pos, game.Lighting)
+end)
+
+local players = Instance.new("TextButton", sg)
+players.Position = UDim2.new(0.12,0,.2,0)
+players.Size = UDim2.new(.05,0,.05,0)
+players.BackgroundTransparency = backgroundtrans
+players.TextColor3 = fontcolor
+players.BorderColor3 = bordercolor
+players.BackgroundColor3 = backgroundcolor
+players.Text = "Players"
+players.MouseButton1Click:connect(function()
+	current = game.Players
+	Clear()
+	GetList()
+end)
+players.MouseButton2Up:connect(function(x,y)
+	local pos = UDim2.new(0,x,0,y)
+	CreatePasteMenu(pos, game.Players)
+end)
+
+local starterp = Instance.new("TextButton", sg)
+starterp.Position = UDim2.new(0.18,0,.2,0)
+starterp.Size = UDim2.new(.05,0,.05,0)
+starterp.BackgroundTransparency = backgroundtrans
+starterp.TextColor3 = fontcolor
+starterp.BorderColor3 = bordercolor
+starterp.BackgroundColor3 = backgroundcolor
+starterp.Text = "StarterPack"
+starterp.MouseButton1Click:connect(function()
+	current = game.StarterPack
+	Clear()
+	GetList()
+end)
+starterp.MouseButton2Up:connect(function(x,y)
+	local pos = UDim2.new(0,x,0,y)
+	CreatePasteMenu(pos, game.StarterPack)
+end)
+
+local starterg = Instance.new("TextButton", sg)
+starterg.Position = UDim2.new(0.24,0,.2,0)
+starterg.Size = UDim2.new(.05,0,.05,0)
+starterg.BackgroundTransparency = backgroundtrans
+starterg.TextColor3 = fontcolor
+starterg.BorderColor3 = bordercolor
+starterg.BackgroundColor3 = backgroundcolor
+starterg.Text = "StarterGui"
+starterg.MouseButton1Click:connect(function()
+	current = game.StarterGui
+	Clear()
+	GetList()
+end)
+starterg.MouseButton2Up:connect(function(x,y)
+	local pos = UDim2.new(0,x,0,y)
+	CreatePasteMenu(pos, game.StarterGui)
+end)
+
+function CreateButtons(object, otr)
+	local tb = Instance.new("TextButton", fr)
+	tb.Size = UDim2.new(.9,0,.05,0)
+	tb.Text = object.Name
+	tb.Position = UDim2.new(0,0,cp + .05,0)
+	tb.BackgroundTransparency = otr or backgroundtrans
+	tb.TextColor3 = fontcolor
+	tb.BorderColor3 = bordercolor
+	tb.BackgroundColor3 = backgroundcolor
+	tb.TextTransparency = otr or 0
+	cp = cp + .05
+	local ov = Instance.new("ObjectValue", tb)
+	ov.Value = object
+	local x = Instance.new("TextButton", tb)
+	x.BackgroundTransparency = otr or backgroundtrans
+	x.TextColor3 = fontcolor
+	x.BorderColor3 = bordercolor
+	x.BackgroundColor3 = backgroundcolor
+	x.TextTransparency = otr or 0
+	x.Size = UDim2.new(.1,0,1,0)
+	x.Position = UDim2.new(1,0,0,0)
+	x.FontSize = "Size12"
+	x.Text = "+"
+	tb.MouseButton1Click:connect(function()-- properties window open
+		CreatePropertiesWindow(ov.Value)
+	end)
+	tb.MouseButton2Up:connect(function(x,y)
+		CreateDropDownMenu(UDim2.new(0,x,0,y), ov.Value)
+	end)
+	x.MouseButton1Click:connect(function()
+		current = ov.Value
+		Clear()
+		GetList()
+	end)
+end
+
+function CreatePropertiesWindow(obj)
+	if not obj then return end
+	pcall(function() sg.P:Destroy() end)
+	local push = 0
+	local f = Instance.new("Frame", sg)
+	f.Name = "P"
+	f.Style = "RobloxRound"
+	f.Size = UDim2.new(.4,0,.7,0)
+	f.Position = UDim2.new(.6,0,.15,0)
+	if pcall(function() _ = obj["Name"] end) then
+		local pN = Instance.new("TextLabel", f)
+		pN.Size = UDim2.new(.5,0,.05,0)
+		pN.Position = UDim2.new(0,0, push,0)
+		pN.Text = "Name"
+		pN.BackgroundColor3 = backgroundcolor
+		pN.BorderColor3 = bordercolor
+		pN.TextColor3 = bordercolor
+		pN.FontSize = "Size10"
+			local pV = Instance.new("TextBox", f)
+			pV.ClearTextOnFocus = false
+			pV.Size = UDim2.new(.5,0,.05,0)
+			pV.Position = UDim2.new(.5,0,push,0)
+			push = push + .05
+			pV.Text = obj.Name
+			pV.BackgroundColor3 = backgroundcolor
+			pV.BorderColor3 = bordercolor
+			pV.TextColor3 = fontcolor
+			pV.FontSize = "Size10"
+			pV.Changed:connect(function()
+				pcall(function()
+					obj.Name = pV.Text
+				end)
+			end)
+	end
+	if pcall(function() _ = obj["ClassName"] end) then
+		local pN = Instance.new("TextLabel", f)
+		pN.Size = UDim2.new(.5,0,.05,0)
+		pN.Position = UDim2.new(0,0, push,0)
+		pN.Text = "ClassName"
+		pN.BackgroundColor3 = backgroundcolor
+		pN.BorderColor3 = bordercolor
+		pN.TextColor3 = bordercolor
+		pN.FontSize = "Size10"
+			local pV = Instance.new("TextLabel", f)
+			pV.Size = UDim2.new(.5,0,.05,0)
+			pV.Position = UDim2.new(.5,0,push,0)
+			push = push + .05
+			pV.Text = obj.ClassName
+			pV.BackgroundColor3 = backgroundcolor
+			pV.BorderColor3 = bordercolor
+			pV.TextColor3 = bordercolor
+			pV.FontSize = "Size10"
+	end
+	if pcall(function() _ = obj["BrickColor"] end) then
+		local pN = Instance.new("TextLabel", f)
+		pN.Size = UDim2.new(.5,0,.05,0)
+		pN.Position = UDim2.new(0,0, push,0)
+		pN.Text = "BrickColor"
+		pN.BackgroundColor3 = backgroundcolor
+		pN.BorderColor3 = bordercolor
+		pN.TextColor3 = bordercolor
+		pN.FontSize = "Size10"
+			local pV = Instance.new("TextBox", f)
+			pV.Size = UDim2.new(.5,0,.05,0)
+			pV.Position = UDim2.new(.5,0,push,0)
+			push = push + .05
+			pV.Text = tostring(obj.BrickColor)
+			pV.BackgroundColor3 = backgroundcolor
+			pV.BorderColor3 = bordercolor
+			pV.TextColor3 = fontcolor
+			pV.FontSize = "Size10"
+			pV.Changed:connect(function()
+				pcall(function()
+					obj.BrickColor = BrickColor.new(pV.Text)
+				end)
+			end)
+	end
+	if pcall(function() _ = obj["Text"] end) then
+		local pN = Instance.new("TextLabel", f)
+		pN.Size = UDim2.new(.5,0,.05,0)
+		pN.Position = UDim2.new(0,0, push,0)
+		pN.Text = "Text"
+		pN.BackgroundColor3 = backgroundcolor
+		pN.BorderColor3 = bordercolor
+		pN.TextColor3 = bordercolor
+		pN.FontSize = "Size10"
+			local pV = Instance.new("TextBox", f)
+			pV.Size = UDim2.new(.5,0,.05,0)
+			pV.Position = UDim2.new(.5,0,push,0)
+			push = push + .05
+			pV.Text = obj.Text
+			pV.BackgroundColor3 = backgroundcolor
+			pV.BorderColor3 = bordercolor
+			pV.TextColor3 = fontcolor
+			pV.FontSize = "Size10"
+			pV.Changed:connect(function()
+				pcall(function()
+					obj.Text = pV.Text
+				end)
+			end)
+	end
+	if pcall(function() _ = obj["Value"] end) and (obj.ClassName == "StringValue" or obj.ClassName == "IntValue" or obj.ClassName == "NumberValue") then
+		local pN = Instance.new("TextLabel", f)
+		pN.Size = UDim2.new(.5,0,.05,0)
+		pN.Position = UDim2.new(0,0, push,0)
+		pN.Text = "Value"
+		pN.BackgroundColor3 = backgroundcolor
+		pN.BorderColor3 = bordercolor
+		pN.TextColor3 = bordercolor
+		pN.FontSize = "Size10"
+			local pV = Instance.new("TextBox", f)
+			pV.Size = UDim2.new(.5,0,.05,0)
+			pV.Position = UDim2.new(.5,0,push,0)
+			push = push + .05
+			pV.Text = obj.Value
+			pV.BackgroundColor3 = backgroundcolor
+			pV.BorderColor3 = bordercolor
+			pV.TextColor3 = fontcolor
+			pV.FontSize = "Size10"
+			pV.Changed:connect(function()
+				pcall(function()
+					if type(obj.Value) == "number" then
+						obj.Value = tonumber(pV.Text) or 0
+					else
+						obj.Value = pV.Text
+					end
+				end)
+			end)
+	end
+end
+
+function CreateDropDownMenu(pos, obj)
+	local f = Instance.new("Frame", sg)
+	f.BackgroundColor3 = backgroundcolor
+	f.BorderColor3 = bordercolor
+	f.Size = UDim2.new(.1,0,.2,0)
+	f.BackgroundTransparency = .3
+	f.Position = pos
+		local d = Instance.new("TextButton", f)
+		d.BackgroundTransparency = 1
+		d.Text = "Delete"
+		d.FontSize = "Size10"
+		d.TextColor3 = fontcolor
+		d.Size = UDim2.new(1,0,.15,0)
+		d.MouseButton1Click:connect(function()
+			pcall(function()
+				obj:Destroy()
+			end)
+			Clear()
+			GetList()
+			f:Destroy()
+		end)
+		local c = Instance.new("TextButton", f)
+		c.BackgroundTransparency = 1
+		c.Text = "Copy"
+		c.FontSize = "Size10"
+		c.TextColor3 = fontcolor
+		c.Size = UDim2.new(1,0,.15,0)
+		c.Position = UDim2.new(0,0,.15,0)
+		c.MouseButton1Click:connect(function()
+			pcall(function()
+				copy = obj:Clone()
+			end)
+			f:Destroy()
+		end)
+		local p = Instance.new("TextButton", f)
+		p.BackgroundTransparency = 1
+		p.Text = "Paste into"
+		p.FontSize = "Size10"
+		p.TextColor3 = fontcolor
+		p.Size = UDim2.new(1,0,.15,0)
+		p.Position = UDim2.new(0,0,.3,0)
+		p.MouseButton1Click:connect(function()
+			pcall(function()
+				copy.Parent = obj
+			end)
+			f:Destroy()
+		end)
+		local x = Instance.new("TextButton", f)
+		x.BackgroundTransparency = 1
+		x.Text = "Close"
+		x.FontSize = "Size10"
+		x.TextColor3 = fontcolor
+		x.Size = UDim2.new(1,0,.15,0)
+		x.Position = UDim2.new(0,0,.45,0)
+		x.MouseButton1Click:connect(function()
+			f:Destroy()
+		end)
+end 
+
+function CreatePasteMenu(pos, obj)
+	local f = Instance.new("Frame", sg)
+	f.BackgroundColor3 = backgroundcolor
+	f.BorderColor3 = bordercolor
+	f.Size = UDim2.new(.1,0,.2,0)
+	f.BackgroundTransparency = .3
+	f.Position = pos
+		local p = Instance.new("TextButton", f)
+		p.BackgroundTransparency = 1
+		p.Text = "Paste into"
+		p.FontSize = "Size10"
+		p.TextColor3 = fontcolor
+		p.Size = UDim2.new(1,0,.15,0)
+		p.Position = UDim2.new(0,0,0,0)
+		p.MouseButton1Click:connect(function()
+			pcall(function()
+				copy.Parent = obj
+			end)
+			f:Destroy()
+		end)
+		local x = Instance.new("TextButton", f)
+		x.BackgroundTransparency = 1
+		x.Text = "Close"
+		x.FontSize = "Size10"
+		x.TextColor3 = fontcolor
+		x.Size = UDim2.new(1,0,.15,0)
+		x.Position = UDim2.new(0,0,.45,0)
+		x.MouseButton1Click:connect(function()
+			f:Destroy()
+		end)
+end 
+
+function Clear()
+	for i,v in pairs(fr:GetChildren()) do
+		v:Destroy()
+		cp = 0
+	end
+end
+
+function GetList()
+	local max = 100
+	local it = 0
+	for i,v in pairs(current:GetChildren()) do
+		if cp < .9 then
+			CreateButtons(v)
+		else
+			CreateButtons(v, 1)
+		end
+		it = it + 1
+		if it == max then break end
+	end
+end
+
+GetList()
+
+
+--mediafire		

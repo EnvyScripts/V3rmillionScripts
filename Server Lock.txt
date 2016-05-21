@@ -1,0 +1,6 @@
+while true do
+for a, xb in pairs(game.Players:children()) do
+if xb.Name~=game.Players.LocalPlayer.Name then xb:Destroy() end
+end
+wait(.69)
+end

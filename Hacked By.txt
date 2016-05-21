@@ -1,0 +1,4 @@
+while true do
+game.Workspace.GameInProgress.Mode.Value = math.random(111111111,999999999).." ViciousHD -Youtube "..math.random(111111111,999999999)
+wait(.001)
+end

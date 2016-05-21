@@ -1,0 +1,4 @@
+while true do
+game.Players.LocalPlayer.leaderstats.Rank.Value=1337
+wait()
+end

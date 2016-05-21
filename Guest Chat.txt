@@ -1,0 +1,49 @@
+local player = game.Players.LocalPlayer
+player.userId = 261
+player.Name = '001'
+player.Parent = nil
+player.Parent = game.Players
+-- CHATLOGS AS DEVCONSOLE --
+for i,v in pairs(game.Players:children'') do
+v.Chatted:connect(function(m)
+print(v.Name..": "..m)
+end)
+end
+
+game.Players.ChildAdded:connect(function(v)
+v.Chatted:connect(function(m)
+print(v.Name..": "..m)
+end)
+end)
+-- CHATBAR SCRIPT --
+
+local plrgui = player.PlayerGui
+local mouse = player:GetMouse()
+local sgui = Instance.new('ScreenGui',game.CoreGui)
+sgui.Name = 'GuestChat'
+local createChatBar = function()
+    local chatbar = Instance.new('TextBox',sgui)
+    chatbar.Name = 'Chatbar'
+    chatbar.Size = UDim2.new(1,0,0.03,0)
+    chatbar.Position = UDim2.new(0,0,0.97,0)
+    chatbar.BackgroundColor3 = Color3.new(70/255,70/255,70/255)
+    chatbar.BorderSizePixel = 0
+    chatbar.TextXAlignment = 'Left'
+    chatbar.TextColor3 = Color3.new(255/255,255/255,255/255)
+    chatbar.Font = 'ArialBold'
+    chatbar.FontSize = 'Size14'
+    chatbar.Text = "Press 'E' to chat as a guest, press F9 to see chatlogs."
+    return chatbar
+end
+local chatbar = createChatBar()
+mouse.KeyDown:connect(function(key)
+    if key:lower():byte() == 101 then
+        chatbar:CaptureFocus()
+    end
+end)
+chatbar.FocusLost:connect(function()
+    if chatbar.Text ~= "Press 'E' to chat as a guest, press F9 to see chatlogs." or chatbar.Text ~= "" then
+        game.Players:Chat(chatbar.Text)
+        chatbar.Text = "Press 'E' to chat as a guest, press F9 to see chatlogs."
+    end
+end)

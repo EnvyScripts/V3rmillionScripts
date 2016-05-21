@@ -1,0 +1,167 @@
+me = game.Players.LocalPlayer
+if script.Parent.className ~= "HopperBin" then
+h = Instance.new("HopperBin",me.Backpack)
+h.Name = "LAZOR"
+script.Parent = h
+end
+
+bin = script.Parent
+
+function prop(part, parent, collide, tran, ref, x, y, z, color)
+part.Parent = parent
+part.formFactor = 0
+part.CanCollide = collide
+part.Transparency = tran
+part.Reflectance = ref
+part.Size = Vector3.new(x,y,z)
+part.BrickColor = BrickColor.new(color)
+part.TopSurface = 0
+part.BottomSurface = 0
+part:BreakJoints()
+end
+
+function weld(w, p, p0, p1, a, b, c, x, y, z)
+w.Parent = p
+w.Part0 = p0
+w.Part1 = p1
+w.C1 = CFrame.fromEulerAnglesXYZ(a,b,c) * CFrame.new(x,y,z)
+end
+
+function mesh(mesh, parent, x, y, z, type)
+mesh.Parent = parent
+mesh.Scale = Vector3.new(x, y, z)
+mesh.MeshType = type
+end
+
+using = false
+
+sound = Instance.new("Sound",me.Character.Head)
+sound.Volume = 0.6
+sound.Pitch = 1
+sound.SoundId = "rbxasset://sounds/uuhhh.wav"
+
+bin.Selected:connect(function(mouse)
+    mouse.Button1Down:connect(function()
+        if using then return end
+        using = true
+        local blagh = Instance.new("Model",me.Character)
+        blagh.Name = "LAZOR"
+
+        local paw = mouse.Hit.p
+
+        local pa1 = Instance.new("Part")
+        prop(pa1,blagh,false,0,0,1,1,1,"Really black")
+        local m1 = Instance.new("SpecialMesh")
+        mesh(m1, pa1, 1.07,1,0.3,"Brick")
+        local w1 = Instance.new("Weld")
+        weld(w1, me.Character.Head, me.Character.Head, pa1, 0.4, 0, 0, 0, -0.4, 0.9)
+
+        local pa2 = pa1:clone()
+        prop(pa2,blagh,false,0,0,1,1,1,"Really black")
+        local w2 = Instance.new("Weld")
+        weld(w2, me.Character.Head, me.Character.Head, pa2, -0.4, 0, 0, 0, 0.4, 0.9)
+
+        local pa3 = Instance.new("Part")
+        prop(pa3,blagh,false,0,0,1,1,1,"Really red")
+        local m3 = Instance.new("SpecialMesh")
+        mesh(m3,pa3,1.3,1.23,0.29,"Brick")
+        local w3 = Instance.new("Weld")
+        weld(w3, me.Character.Head, me.Character.Head, pa3, 0.4, 0, 0, 0, -0.4, 0.9)
+
+        local pa4 = pa3:clone()
+        prop(pa4,blagh,false,0,0,1,1,1,"Really red")
+        local w4 = Instance.new("Weld")
+        weld(w4, me.Character.Head, me.Character.Head, pa4, -0.4, 0, 0, 0, 0.4, 0.9)
+
+        local eye1a = Instance.new("Part")
+        prop(eye1a,blagh,false,0,0,1,1,1,"Institutional white")
+        eye1a.Shape = "Ball"
+        local emesh1 = Instance.new("SpecialMesh")
+        mesh(emesh1,eye1a,0.75,0.75,0.75,"Sphere")
+        local ew = Instance.new("Weld")
+        weld(ew, me.Character.Head, me.Character.Head, eye1a, 0, 0, 0, 0.45, -1.3, 1.1)
+
+        local eye1b = Instance.new("Part")
+        prop(eye1b,blagh,false,0,0,1,1,1,"Really black")
+        eye1b.Shape = "Ball"
+        local emesh1b = Instance.new("SpecialMesh")
+        mesh(emesh1b,eye1b,0.4,0.4,0.4,"Sphere")
+        local ew2 = Instance.new("Weld")
+        weld(ew2, eye1a, eye1a, eye1b, 0, 0, 0, 0.09, -0.04, 0.2)
+
+        local eye2a = eye1a:clone()
+        prop(eye2a,blagh,false,0,0,1,1,1,"Institutional white")
+        local ew3 = Instance.new("Weld")
+        weld(ew3, me.Character.Head, me.Character.Head, eye2a, 0, 0, 0, -0.45, -1.3, 1.1)
+
+        local eye2b = eye1b:clone()
+        prop(eye2b,blagh,false,0,0,1,1,1,"Really black")
+        local ew5 = Instance.new("Weld")
+        weld(ew5, eye2a, eye2a, eye2b, 0, 0, 0, -0.05, 0.07, 0.2)
+
+        local bill = Instance.new("BillboardGui",pa1)
+        bill.Adornee = bill.Parent
+        bill.Size = UDim2.new(0,150,0,80)
+        local txt = Instance.new("TextLabel",bill)
+        txt.Size = UDim2.new(0,0,0,0)
+        txt.Position = UDim2.new(0,100,0,-20)
+        txt.Text = "IMA FIRIN' MAH LAZORR!!"
+        txt.FontSize = "Size24"
+        txt.TextColor3 = Color3.new(0,0,0)
+        sound.Volume = 0.6
+        for i=1, 5 do
+            sound.Pitch = math.random(400,900)/1000
+            sound:play()
+            wait(0.1)
+        end
+        local bg = Instance.new("BodyGyro",me.Character.Torso)
+        bg.maxTorque = Vector3.new(math.huge,math.huge,math.huge)
+        bg.cframe = CFrame.new(me.Character.Torso.Position, paw)
+        for i=1, 5 do
+            sound.Pitch = math.random(400,900)/1000
+            sound:play()
+            wait(0.2)
+        end
+        txt.Text = "BLAARGHH!!!!!!"
+        sound.Volume = 0.85
+        for i=1, 60 do
+            local dist = (me.Character.Head.Position - paw).magnitude
+            if dist >= 600 then
+                dist = 600
+            end
+            bg.cframe = CFrame.new(me.Character.Torso.Position, paw)
+            sound.Pitch = math.random(550,750)/1000
+            sound:play()
+            local bewm = Instance.new("Part")
+            prop(bewm, blagh, false, 0.4, 0.25, 1, 1, dist, "Cyan")
+            bewm.Anchored = true
+            local mes = Instance.new("SpecialMesh")
+            mesh(mes,bewm,1.2,1.2,1,"Brick")
+            bewm.CFrame = CFrame.new(me.Character.Head.Position, paw) * CFrame.new(0,0,-bewm.Size.Z/2) * CFrame.new(0,0,-1)
+            local luck = math.random(1,3)
+            if luck == 1 then
+                local cfr = Instance.new("Part",blagh)
+                cfr.Size = Vector3.new(1,1,1)
+                cfr.Transparency = 1
+                cfr.Anchored = true
+                cfr.CFrame = bewm.CFrame * CFrame.new(0,0,-bewm.Size.Z/2)
+                local ex = Instance.new("Explosion")
+                ex.Parent = blagh
+                ex.Position = cfr.Position
+                ex.BlastRadius = 9
+                ex.BlastPressure = 400000
+                ex.Hit:connect(function(part)
+                    if part:GetMass() < 240 then
+                        part.Anchored = false
+                        part:BreakJoints()
+                    end
+                end)
+            end
+            wait()
+            bewm:remove()
+        end
+        blagh:remove()
+        bg:remove()
+        using = false
+    end)
+end)

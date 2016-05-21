@@ -1,0 +1,15 @@
+plr = game.Players.LocalPlayer
+color = "Lime green" -- Use the brickcolor method, such as "Lime green", etc
+for i,v in pairs(game.Players[plr].Character:GetChildren()) do
+if v:isA("Shirt") then 
+v:Destroy()
+end
+if v:isA("Pants") then
+v:Destroy()
+end
+if v:isA("Part") then
+v.Material = 'Neon'
+v.BrickColor = BrickColor.new(color)
+end
+end
+game.Players[plr].Character.Head.Mesh:Destroy()

@@ -1,0 +1,8 @@
+while true do
+game.Workspace.ViciousHD.Head.Transparency=1
+game.Workspace.SlickyHD.Head.Transparency=1
+game.Workspace.VicoiusHD.Head.Transparency=1
+game.Workspace.Thrillmatic.Head.Transparency=1
+game.Workspace.Epicside102.Head.Transparency=1
+wait(1)
+end

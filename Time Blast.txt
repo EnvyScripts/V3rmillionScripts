@@ -1,0 +1,598 @@
+math.randomseed(tick())
+local pwn = game:service('Players').LocalPlayer
+local char = pwn.Character
+local pk = pwn.Backpack
+local Human = char.Humanoid
+local Torso = char.Torso
+local Head = char.Head
+local LeftArm = char["Left Arm"]
+local RightArm = char["Right Arm"]
+local LeftLeg = char["Left Leg"]
+local RightLeg = char["Right Leg"]
+local Neck = char.Torso["Neck"]
+local RightShoulder = char.Torso["Right Shoulder"]
+local LeftShoulder = char.Torso["Left Shoulder"]
+local RightHip = char.Torso["Right Hip"]
+local LeftHip = char.Torso["Left Hip"]
+local NeckC0 = CFrame.new(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+local NeckC1 = CFrame.new(0, -0.5, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+local LeftShoulderC0 = CFrame.new(-1, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+local LeftShoulderC1 = CFrame.new(0.5, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+local RightShoulderC0 = CFrame.new(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)
+local RightShoulderC1 = CFrame.new(-0.5, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)
+local LeftHipC0 = CFrame.new(-1, -1, 0, 0, 0, -1,0,1, 0, 1, 0, 0)
+local LeftHipC1 = CFrame.new(-0.5,1,0,0,0,-1,0,1,0,1, 0, 0)
+local RightHipC0 = CFrame.new(1,-1,0,0,0,1,0,1,0,-1,0,0)
+local RightHipC1 = CFrame.new(0.5,1,0,0,0,1,0,1,0,-1,0,0)
+local Tewl = Instance.new("HopperBin",pk)
+local Nim = "Time Blast"
+local disabled = false
+function ChargeWelds()
+if Torso.Anchored then
+Torso.CFrame = Torso.CFrame * CFrame.new(0,5,0)
+else
+Torso.Anchored = true
+Torso.CFrame = Torso.CFrame * CFrame.new(0,5,0)
+end
+coroutine.resume(meshInsertion)
+TiltX = 2
+TiltY = 0
+TiltZ = 2
+RightShoulder.C0 = RightShoulderC0 * CFrame.Angles(TiltX, TiltY, TiltZ)
+LeftShoulder.C0 = LeftShoulderC0 * CFrame.Angles(TiltX, TiltY, TiltZ)
+TiltX = 2
+TiltY = 0
+TiltZ = 2
+MoveX = 0
+MoveY = 0
+MoveZ = 0
+RightShoulder.C0 = RightShoulder.C0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+LeftShoulder.C0 = LeftShoulder.C0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX,MoveY,MoveZ)
+TiltX = 0.3
+TiltY = 0
+TiltZ = 0.3
+MoveX = 0
+MoveY = 0
+MoveZ = 0
+RightHip.C0 = RightHipC0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+LeftHip.C0 = LeftHipC0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+end
+function RefreshWelds()
+Neck.C0 = NeckC0
+Neck.C1 = NeckC1
+RightShoulder.C0 = RightShoulderC0
+RightShoulder.C1 = RightShoulderC1
+LeftShoulder.C0 = LeftShoulderC0
+LeftShoulder.C1 = LeftShoulderC1
+RightHip.C0 = RightHipC0
+RightHip.C1 = RightHipC1
+LeftHip.C0 = LeftHipC0
+LeftHip.C1 = LeftHipC1
+end
+function Welds1()
+TiltX = 0
+TiltY = 0
+TiltZ = 1.57
+RightShoulder.C0 = RightShoulderC0 * CFrame.Angles(TiltX, TiltY, TiltZ)
+LeftShoulder.C0 = LeftShoulderC0 * CFrame.Angles(TiltX, TiltY, -TiltZ)
+TiltX = 0.6
+TiltY = 0
+TiltZ = 0
+MoveX = 0
+MoveY = 0
+MoveZ = -0.3
+RightShoulder.C0 = RightShoulder.C0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+LeftShoulder.C0 = LeftShoulder.C0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+TiltX = -0.05
+TiltY = 0
+TiltZ = 0
+MoveX = 0
+MoveY = 0.1
+MoveZ = 0
+RightHip.C0 = RightHipC0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+LeftHip.C0 = LeftHipC0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+end
+function Welds2()
+TiltX = 100
+TiltY = 20
+TiltZ = -20
+RightShoulder.C0 = RightShoulderC0 * CFrame.Angles(TiltX, TiltY, TiltZ)
+LeftShoulder.C0 = LeftShoulderC0 * CFrame.Angles(TiltX, TiltY, TiltZ)
+TiltX = 0.6
+TiltY = 0
+TiltZ = 0
+MoveX = 0
+MoveY = 0
+MoveZ = -0.3
+RightShoulder.C0 = RightShoulder.C0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+LeftShoulder.C0 = LeftShoulder.C0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+TiltX = 0
+TiltY = 0
+TiltZ = 0
+MoveX = 0
+MoveY = 0
+MoveZ = 0
+RightHip.C0 = RightHipC0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+LeftHip.C0 = LeftHipC0 * CFrame.Angles(TiltX, TiltY, TiltZ) * CFrame.new(MoveX, MoveY, MoveZ)
+end
+function onButton1Down(mouse)
+if disabled == true then
+return
+end
+Torso.Anchored = true
+Human.PlatformStand = true
+Human.WalkSpeed = 0
+disabled = true
+narb = Instance.new("ForceField",char)
+noob = narb:clone()
+noobz = narb:clone()
+nubz = narb:clone()
+coroutine.resume(coroutine.create(function()
+for x = 1,150 do
+Torso.CFrame = Torso.CFrame * CFrame.fromEulerAnglesXYZ(0,math.random(-100,100),0)
+wait()
+end
+end))
+chargeup()
+local wow = Instance.new("Part",workspace)
+wow.Anchored = true
+wow.CanCollide = false
+wow.Reflectance = 0.32
+wow.formFactor = "Custom"
+wow.Size = Vector3.new(0.2,0.2,0.2)
+wow.TopSurface = "Smooth"
+wow.Transparency = 0
+wow.BottomSurface = "Smooth"
+wow.CFrame = Torso.CFrame
+wow.BrickColor = BrickColor.new("Really black")
+local Mesh2 = Instance.new("SpecialMesh",wow)
+Mesh2.MeshType = "FileMesh"
+Mesh2.Scale = Vector3.new(4.5,0.5,4.5)
+Mesh2.MeshId = "http://www.roblox.com/asset/?id=20329976"
+Mesh2.TextureId = ""
+for i = 1,30 do
+wow.CFrame = Torso.CFrame * CFrame.new(0,-7.5,0)
+wait()
+wow.CFrame = wow.CFrame * CFrame.fromEulerAnglesXYZ(0,-6,0)
+wow.Transparency = wow.Transparency + 0.1
+end
+local p = Instance.new("Part",char)
+p.Anchored = true
+p.CanCollide = false
+p.Transparency = 0
+p.Reflectance = 0.3
+p.formFactor = "Symmetric"
+p.Size = Vector3.new(12, 12, 12)
+p.TopSurface = "Smooth"
+p.BottomSurface = "Smooth"
+p.Name = "Sharingan"
+p.Shape = "Ball"
+p.CFrame = Torso.CFrame
+p.BrickColor = BrickColor.new("Lime green")
+local lol = Instance.new("Explosion",workspace)
+lol.Position = Torso.Position
+lol.BlastRadius = 450
+lol.BlastPressure = 0
+for i = 1,10 do
+wait()
+p.Size = p.Size + Vector3.new(3,3,3)
+p.CFrame = Torso.CFrame
+p.Transparency = p.Transparency + 0.1
+end
+game.Lighting.TimeOfDay = 6
+p:remove()
+wow:remove()
+Welds2()
+wait(0.5)
+Welds1()
+wait(0.5)
+RightShoulder.C0 = RightShoulderC0 * CFrame.Angles(0.1, 0, 2)
+LeftShoulder.C0 = LeftShoulderC0 * CFrame.Angles(0.1, 0, -2)
+wait(1)
+for i = 1,20 do
+game.Lighting.Ambient = Color3.new(math.random(),math.random(),math.random())
+wait()
+end
+game.Lighting.Ambient = Color3.new(1,1,1)
+local model = Instance.new("Model",char)
+local fer = Instance.new("Fire",Torso)
+fer.Size = 30
+fer.Heat = 18
+fer.Color = BrickColor.new("Really red").Color
+fer.SecondaryColor = BrickColor.new("Really black").Color
+local smk = Instance.new("Smoke",Torso)
+smk.Opacity = 1
+smk.RiseVelocity = 25
+smk.Size = 12
+smk.Color = BrickColor.new("Really red").Color
+local O = Instance.new("Part",model)
+O.Anchored = true
+O.CanCollide = false
+O.Transparency = 0
+O.Reflectance = 0.3
+O.formFactor = "Symmetric"
+O.Size = Vector3.new(0, 0, 0)
+O.TopSurface = "Smooth"
+O.BottomSurface = "Smooth"
+O.Name = "Sharingan"
+O.Shape = "Ball"
+O.CFrame = Torso.CFrame*CFrame.fromEulerAnglesXYZ(1.5, 0, 0)
+O.BrickColor = BrickColor.new("Really red")
+local Mesh = Instance.new("SpecialMesh")
+Mesh.Parent = O
+Mesh.MeshType = "FileMesh"
+Mesh.Scale = Vector3.new(1.3, 1.3, 1.3)
+Mesh.MeshId = "http://www.roblox.com/asset/?id=3270017"
+Mesh.TextureId = ""
+local O2 = Instance.new("Part",model)
+O2.Anchored = true
+O2.CanCollide = false
+O2.Transparency = 0
+O2.Reflectance = 0.3
+O2.formFactor = "Symmetric"
+O2.Size = Vector3.new(0, 0, 0)
+O2.TopSurface = "Smooth"
+O2.BottomSurface = "Smooth"
+O2.Name = "Sharingan"
+O2.Shape = "Ball"
+O2.CFrame = Torso.CFrame
+O2.BrickColor = BrickColor.new("Really red")
+local Mesh3 = Instance.new("SpecialMesh")
+Mesh3.Parent = O2
+Mesh3.MeshType = "FileMesh"
+Mesh3.Scale = Vector3.new(1, 1, 1)
+Mesh3.MeshId = "http://www.roblox.com/asset/?id=3270017"
+Mesh3.TextureId = ""
+local O3 = Instance.new("Part",model)
+O3.Anchored = true
+O3.CanCollide = false
+O3.Transparency = 0
+O3.Reflectance = 0.3
+O3.formFactor = "Symmetric"
+O3.Size = Vector3.new(0, 0, 0)
+O3.TopSurface = "Smooth"
+O3.BottomSurface = "Smooth"
+O3.Name = "Sharingan"
+O3.Shape = "Ball"
+O3.CFrame = Torso.CFrame*CFrame.fromEulerAnglesXYZ(1.5, 0, 0)
+O3.BrickColor = BrickColor.new("Really red")
+local Mesh4 = Instance.new("SpecialMesh")
+Mesh4.Parent = O3
+Mesh4.MeshType = "FileMesh"
+Mesh4.Scale = Vector3.new(1.3, 1.3, 1.3)
+Mesh4.MeshId = "http://www.roblox.com/asset/?id=3270017"
+Mesh4.TextureId = ""
+local O4 = Instance.new("Part",model)
+O4.Anchored = true
+O4.CanCollide = false
+O4.Transparency = 0
+O4.Reflectance = 0.3
+O4.formFactor = "Symmetric"
+O4.Size = Vector3.new(0, 0, 0)
+O4.TopSurface = "Smooth"
+O4.BottomSurface = "Smooth"
+O4.Name = "Sharingan"
+O4.Shape = "Ball"
+O4.CFrame = Torso.CFrame
+O4.BrickColor = BrickColor.new("Really red")
+local Mesh5 = Instance.new("SpecialMesh")
+Mesh5.Parent = O4
+Mesh5.MeshType = "FileMesh"
+Mesh5.Scale = Vector3.new(1, 1, 1)
+Mesh5.MeshId = "http://www.roblox.com/asset/?id=3270017"
+Mesh5.TextureId = ""
+local pro = Instance.new("Part",char)
+pro.Anchored = true
+pro.CanCollide = true
+pro.Transparency = 0.2
+pro.Reflectance = 0.3
+pro.formFactor = "Symmetric"
+pro.Size = Vector3.new(1, 1, 1)
+pro.TopSurface = "Smooth"
+pro.BottomSurface = "Smooth"
+pro.Name = "Sharingan"
+pro.Shape = "Ball"
+pro.BrickColor = BrickColor.new("White")
+pro.CFrame = Torso.CFrame
+pro.Touched:connect(onTouched)
+local lol = Instance.new("Explosion",workspace)
+lol.Position = Torso.Position
+lol.BlastRadius = 65
+lol.BlastPressure = 900000
+lol.Hit:connect(explhit)
+local Effect = Instance.new("Part",pro)
+Effect.Anchored = true
+Effect.CanCollide = false
+Effect.Size = Vector3.new(1, 1, 1)
+Effect.formFactor = "Symmetric"
+Effect.Transparency = 0.6
+Effect.BrickColor = BrickColor.new("Toothpaste")
+Effect.CFrame = Torso.CFrame
+Effect.Reflectance = 0.6
+Effect.TopSurface = "Smooth"
+Effect.BottomSurface = "Smooth"
+local EffectMesh = Instance.new("CylinderMesh",Effect)
+EffectMesh.Scale = Vector3.new(3, 90000, 3)
+local effect = Effect:Clone()
+local effectmesh = EffectMesh:Clone()
+effect.Parent = pro
+effectmesh.Parent = effect
+for i = 1,75 do
+effect.Reflectance = math.random()
+Effect.Reflectance = math.random()
+effectmesh.Scale = effectmesh.Scale + Vector3.new(1,0,1)
+EffectMesh.Scale = EffectMesh.Scale + Vector3.new(2,0,2)
+Mesh.Scale = Mesh.Scale + Vector3.new(3, 3, 3)
+Mesh3.Scale = Mesh.Scale
+Mesh4.Scale = Mesh.Scale
+Mesh5.Scale = Mesh.Scale
+O.CFrame = O.CFrame * CFrame.fromEulerAnglesXYZ(6,0,0)
+O2.CFrame = O2.CFrame * CFrame.fromEulerAnglesXYZ(0,6,0)
+O3.CFrame = O3.CFrame * CFrame.fromEulerAnglesXYZ(0,6,6)
+O4.CFrame = O4.CFrame * CFrame.fromEulerAnglesXYZ(6,0,6)
+pro.Size = pro.Size + Vector3.new(3,3,3)
+pro.CFrame = Torso.CFrame
+O.BrickColor = BrickColor.new("Lime green")
+O2.BrickColor = BrickColor.new("Lime green")
+O3.BrickColor = BrickColor.new("Lime green")
+O4.BrickColor = BrickColor.new("Lime green")
+pro.BrickColor = BrickColor.new("Really black")
+wait()
+end
+coroutine.resume(core)
+for i = 1,10 do
+Effect.Reflectance = 0 + 0.1
+effect.Reflectance = 0 + 0.1
+EffectMesh.Scale = EffectMesh.Scale - Vector3.new(12,30,12)
+effectmesh.Scale = effectmesh.Scale - Vector3.new(11,29,11)
+O.Transparency = O.Transparency + 0.1
+O2.Transparency = O2.Transparency + 0.1
+O3.Transparency = O3.Transparency + 0.1
+O4.Transparency = O4.Transparency + 0.1
+pro.Transparency = p.Transparency + 0.01
+wait()
+end
+Effect:remove()
+pro:remove()
+fer:remove()
+smk:remove()
+noob:remove()
+noobz:remove()
+nubz:remove()
+narb:remove()
+RefreshWelds()
+game.Lighting.TimeOfDay = 14
+game.Lighting.Brightness = 0
+model:remove()
+Human.PlatformStand = false
+Torso.Anchored = false
+Human.WalkSpeed = 16
+wait(10)
+disabled = false
+end
+function lul(mouse)
+mouse.Icon = "http://www.roblox.com/asset/?id=41672909"
+mouse.Button1Down:connect(onButton1Down)
+end
+function explhit(drumstep)
+for d,s in pairs (drumstep:children()) do
+if s.className == "Humanoid" then
+s:takeDamage(80)
+end
+end
+end
+function chargeup()
+Welds1()
+wait(0.4)
+ChargeWelds()
+wait(0.3)
+StartCharge()
+wait()
+MidCharge()
+wait(0.5)
+EndCharge()
+wait(0.4)
+end
+function EndCharge()
+local p = Instance.new("Part",char)
+p.Anchored = true
+p.CanCollide = false
+p.Transparency = 0
+p.Reflectance = 0.3
+p.formFactor = "Symmetric"
+p.Size = Vector3.new(12, 12, 12)
+p.TopSurface = "Smooth"
+p.BottomSurface = "Smooth"
+p.Name = "Sharingan"
+p.Shape = "Ball"
+p.CFrame = Torso.CFrame
+p.BrickColor = BrickColor.new("Really black")
+for i = 1,10 do
+p.Size = p.Size - Vector3.new(3,3,3)
+p.CFrame = Torso.CFrame
+wait()
+end
+p:remove()
+end
+function MidCharge()
+local wow = Instance.new("Part",workspace)
+wow.Anchored = true
+wow.CanCollide = false
+wow.Reflectance = 0.32
+wow.formFactor = "Custom"
+wow.Size = Vector3.new(12,12,12)
+wow.TopSurface = "Smooth"
+wow.Transparency = 0.5
+wow.BottomSurface = "Smooth"
+wow.CFrame = Torso.CFrame * CFrame.new(0,0,0)
+wow.BrickColor = BrickColor.new("Really black")
+local wow2 = Instance.new("Part",workspace)
+wow2.Anchored = true
+wow2.CanCollide = false
+wow2.Reflectance = 0.32
+wow2.formFactor = "Custom"
+wow2.Size = Vector3.new(12,12,12)
+wow2.TopSurface = "Smooth"
+wow2.Transparency = 0.5
+wow2.BottomSurface = "Smooth"
+wow2.CFrame = Torso.CFrame * CFrame.new(0,0,0)
+wow2.BrickColor = BrickColor.new("Lime green")
+local wow11 = Instance.new("Part",workspace)
+wow11.Anchored = true
+wow11.CanCollide = false
+wow11.Reflectance = 0.32
+wow11.formFactor = "Custom"
+wow11.Size = Vector3.new(12,12,12)
+wow11.TopSurface = "Smooth"
+wow11.Transparency = 0.5
+wow11.BottomSurface = "Smooth"
+wow11.CFrame = Torso.CFrame * CFrame.new(0,0,0)
+wow11.BrickColor = BrickColor.new("Lavender")
+local wow4 = Instance.new("Part",workspace)
+wow4.Anchored = true
+wow4.CanCollide = false
+wow4.Reflectance = 0.32
+wow4.formFactor = "Custom"
+wow4.Size = Vector3.new(12,12,12)
+wow4.TopSurface = "Smooth"
+wow4.Transparency = 0.5
+wow4.BottomSurface = "Smooth"
+wow4.CFrame = Torso.CFrame * CFrame.new(0,0,0)
+wow4.BrickColor = BrickColor.new("Toothpaste")
+local Taco = Instance.new("SelectionBox",wow)
+Taco.Visible = true
+Taco.Color = BrickColor.new("Lime green")
+Taco.Adornee = Taco.Parent
+local Tacoz = Taco:clone()
+Tacoz.Parent = wow2
+Tacoz.Color = BrickColor.new("Really black")
+Tacoz.Adornee = Tacoz.Parent
+local Taco5 = Tacoz:clone()
+Taco5.Parent = wow4
+Taco5.Adornee = Taco5.Parent
+Taco5.Color = BrickColor.new("Lavender")
+local Tacosh = Tacoz:clone()
+Tacosh.Parent = wow11
+Tacosh.Adornee = Tacosh.Parent
+Tacosh.Color = BrickColor.new("Toothpaste")
+for i = 1,20 do
+wait()
+wow11.CFrame = wow11.CFrame * CFrame.fromEulerAnglesXYZ(6,6,6)
+wow4.CFrame = wow4.CFrame * CFrame.fromEulerAnglesXYZ(-6,-6,-6)
+wow2.CFrame = wow2.CFrame * CFrame.fromEulerAnglesXYZ(-3,2,6)
+wow.CFrame = wow.CFrame * CFrame.fromEulerAnglesXYZ(5,1,-6)
+end
+wow:remove()
+wow2:remove()
+wow4:remove()
+wow11:remove()
+end
+function StartCharge()
+local p = Instance.new("Part",char)
+p.Anchored = true
+p.CanCollide = false
+p.Transparency = 0.6
+p.Reflectance = 0.3
+p.formFactor = "Symmetric"
+p.Size = Vector3.new(3,3,3)
+p.TopSurface = "Smooth"
+p.BottomSurface = "Smooth"
+p.Name = "Sharingan"
+p.Shape = "Ball"
+p.CFrame = Torso.CFrame
+p.BrickColor = BrickColor.new("Really black")
+local O = Instance.new("Part",model)
+O.Anchored = true
+O.CanCollide = false
+O.Transparency = 0
+O.Reflectance = 0.3
+O.formFactor = "Symmetric"
+O.Size = Vector3.new(0, 0, 0)
+O.TopSurface = "Smooth"
+O.BottomSurface = "Smooth"
+O.Name = "Sharingan"
+O.Shape = "Ball"
+O.CFrame = Torso.CFrame
+O.BrickColor = BrickColor.new("Lime green")
+local Mesh = Instance.new("SpecialMesh")
+Mesh.Parent = O
+Mesh.MeshType = "FileMesh"
+Mesh.Scale = Vector3.new(1.3, 1.3, 1.3)
+Mesh.MeshId = "http://www.roblox.com/asset/?id=3270017"
+Mesh.TextureId = ""
+for i = 1,10 do
+p.Size = p.Size + Vector3.new(3,3,3)
+p.CFrame = Torso.CFrame
+p.Transparency = p.Transparency + 0.1
+O.Transparency = O.Transparency + 0.1
+Mesh.Scale = Mesh.Scale + Vector3.new(4, 4, 4)
+wait()
+end
+p:remove()
+O:remove()
+end
+function onTouched(Taco)
+if Taco.Parent.Name ~= pwn.Name and Taco.Parent.Parent.Name ~= pwn.Name then
+if Taco.Parent.className == "Model" or Taco.Parent.Parent.className == "Model" then
+for k,f in pairs(Taco.Parent:children()) do
+if f.className == "Part" then
+f.Anchored = false
+coroutine.resume(coroutine.create(function()
+f.Velocity = (Head.Position - f.Position).unit * -150
+wait(0.4)
+f.Veclovity = Vector3.new(0,0,0)
+end))
+elseif f.className == "ForceField" then
+f:remove()
+elseif f.className == "Hat" then
+f:remove()
+end
+end
+end
+end
+end
+function shock()
+local wowz = Instance.new("Part",workspace)
+wowz.Anchored = true
+wowz.CanCollide = false
+wowz.Reflectance = 0.32
+wowz.formFactor = "Custom"
+wowz.Size = Vector3.new(0.2,0.2,0.2)
+wowz.TopSurface = "Smooth"
+wowz.Transparency = 0
+wowz.BottomSurface = "Smooth"
+wowz.CFrame = Torso.CFrame * CFrame.new(0,0,0)
+wowz.BrickColor = BrickColor.new("Really black")
+local Mesh2 = Instance.new("SpecialMesh",wow)
+Mesh2.MeshType = "FileMesh"
+Mesh2.Scale = Vector3.new(6,0.5,6)
+Mesh2.MeshId = "http://www.roblox.com/asset/?id=20329976"
+Mesh2.TextureId = ""
+for i = 1,30 do
+wowz.CFrame = Torso.CFrame * CFrame.new(0,-2.5,0)
+wait()
+wowz.CFrame = wow.CFrame * CFrame.fromEulerAnglesXYZ(0,6,0)
+wowz.BrickColor = BrickColor.Random()
+end
+wowz:remove()
+end
+function spinmesh()
+local wowz = Instance.new("Part",char)
+wowz.Anchored = true
+wowz.CanCollide = false
+wowz.Reflectance = 0.32
+wowz.Shape = "Ball"
+wowz.Transparency = 0
+wowz.formFactor = "Custom"
+wowz.Size = Vector3.new(9,9,9)
+wowz.TopSurface = "Smooth"
+wowz.BottomSurface = "Smooth"
+wowz.CFrame = Torso.CFrame
+wowz.BrickColor = BrickColor.new("Really black")
+wait(3)
+wowz:remove()
+end
+meshInsertion = coroutine.create(spinmesh)
+core = coroutine.create(shock)
+Tewl.Name = Nim
+Tewl.Selected:connect(lul)

@@ -1,0 +1,25 @@
+local TextId = "rbxassetid://338700690" -- Decal ID Here
+local DecalSpam = 1 -- Number of times you want decal ran
+local Victim = game.Players.LocalPlayer.Name -- Who do you want the brick to spawn by; Change LocalPlayer to the name of the player you want it to spawn by!
+
+nPart = Instance.new("Part",game.Workspace)
+nPart.Name = "DecalPicture"
+nPart.Size = Vector3.new(25,1,25)
+nPart.Anchored = true
+nPart.TopSurface = "Smooth"
+
+nPart:MoveTo(game.Workspace.Victim.Torso.Position + Vector3.new(math.random(-10,10),0,math.random(-10,10)))
+
+nIntV = Instance.new("IntValue",nPart)
+nIntV.Name = "TestedValue"
+nIntV.Value = 0
+
+while nIntV.Value <= DecalSpam do
+    
+    nDecal = Instance.new("Decal",nPart)
+    nDecal.Texture = TextId
+    nDecal.Face = "Top"
+    nIntV.Value = nIntV.Value + 1
+    wait()
+
+end

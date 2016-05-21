@@ -1,0 +1,158 @@
+me = game:GetService("Players").baee33 VC = Vector3.new CF = CFrame.new hop = Instance.new("HopperBin",me.Backpack) hop.Name = "Knight" 
+Model = Instance.new("Model",me.Character) Model.Name = "PartsPack" sword1equiped = false numchangerformodes = 1 overalldamage = 5
+armsMD = {me.Character.Torso:FindFirstChild("Right Shoulder"),me.Character.Torso:FindFirstChild("Left Shoulder")} MainGui = nil damageallowed = false
+arms = {me.Character:FindFirstChild("Right Arm"),me.Character:FindFirstChild("Left Arm")} mode1 = false mode2 = true mode3 = false
+TableForModes = {"2H Sword","DualBlades","Sword and Shield"} local debounceunequip = true debounceequip = true modestabiliazer = true 
+debounceforsworddamage = true debounceforsworddamage2 = true
+local d22 = me.Character:GetChildren() for i = 1,#d22 do if d22[i].className == "CharacterMesh" then d22[i]:Destroy() end end if me.Character.Head:FindFirstChild("face") ~= nil then me.Character.Head:FindFirstChild("face"):Destroy() else end
+local b22 = me.Character:GetChildren() for i = 1,#b22 do if b22[i].className == "Hat" then b22[i]:Destroy() end end 
+local c22 = me.Character:GetChildren() for i = 1,#c22 do if c22[i].className == "Part" then c22[i].BrickColor = BrickColor.new("Really black")  end end 
+local f22 = me.Character:GetChildren() for i = 1,#f22 do if f22[i].className == "Shirt" then f22[i]:Destroy() end end 
+local v22 = me.Character:GetChildren() for i = 1,#v22 do if v22[i].className == "Pants" then v22[i]:Destroy() end end me.Character.Head.BrickColor = BrickColor.new("Really red")
+
+function slash()  damageallowed = true overalldamage = 25
+if mode1 == true then holdarmright.Part1 = nil armsMD[1].Part1 = arms[1] local storarms = armsMD[1].C0 armsMD[1].C0 = armsMD[1].C0*CFrame.new(.3,0,.3)
+for i = 0,5,.2 do armsMD[1].DesiredAngle = 0 armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = armsMD[1].C0*CFrame.Angles(0,0,math.rad(i*-1)) wait() end
+for i = 5,2,-.2 do armsMD[1].DesiredAngle = 0 armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = armsMD[1].C0*CFrame.Angles(0,0,math.rad(i)) wait() end
+armsMD[1].C0 = storarms armsMD[1].Part1 = nil holdarmright.Part1 = arms[1]  damageallowed = false overalldamage = 25
+else if mode2 == true then
+holdarmright2.Part1 = nil armsMD[1].Part1 = arms[1] holdarmleft2.Part1 = nil armsMD[2].Part1 = arms[2]
+for i = 1,0,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(-.2,6.3,i*-1) wait() end
+for i = 0,1,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(-.2,6.3,i*-1)  wait() end
+armsMD[1].Part1 = nil holdarmright2.Part1 = arms[1] armsMD[2].Part1 = nil holdarmleft2.Part1 = arms[2]
+else if mode3 == true then holdarmright3.Part1 = nil armsMD[1].Part1 = arms[1] damageallowed = false
+for i = 1,0,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end
+for i = 0,1,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end
+armsMD[1].Part1 = nil holdarmright3.Part1 = arms[1] end end end  damageallowed = false
+end
+
+function armor()
+local hat = Instance.new("Hat",me.Character) hat.Name = "Knight Helm" hat.AttachmentPos = VC(0,.3,.1)
+local han = Instance.new("Part") han.Anchored = false han.CanCollide = false han.Name = "Handle" han.Size = VC(1,1,1) han.Position = VC(me.Character.Head.Position) han.Parent = hat
+local msh = Instance.new("SpecialMesh",han) msh.MeshType = "FileMesh" msh.MeshId = "http://www.roblox.com/asset/?id=33364735" msh.Scale = VC(1,1,1) msh.VertexColor = VC(0,0,0)
+msh.TextureId = "http://www.roblox.com/asset/?id=33364709"
+local charm = Instance.new("CharacterMesh",me.Character) charm.BodyPart = "Torso" charm.MeshId = 68241695 charm.OverlayTextureId = 42265273
+local charm = Instance.new("CharacterMesh",me.Character) charm.BodyPart = "RightLeg" charm.MeshId = 74653410 charm.OverlayTextureId = 42265273
+local charm = Instance.new("CharacterMesh",me.Character) charm.BodyPart = "LeftLeg" charm.MeshId = 74653371 charm.OverlayTextureId = 42265273
+local charm = Instance.new("CharacterMesh",me.Character) charm.BodyPart = "RightArm" charm.MeshId = 68241658 charm.OverlayTextureId = 42265273
+local charm = Instance.new("CharacterMesh",me.Character) charm.BodyPart = "LeftArm" charm.MeshId = 68241543 charm.OverlayTextureId = 42265273
+local sword = Instance.new("Part",Model) sword.FormFactor = "Custom" sword.Size = VC(.5,3.5,.5) sword.CanCollide = false sword.CFrame = me.Character.Torso.CFrame swordweld = Instance.new("Weld",me.Character.Torso) swordweld.Part0 = swordweld.Parent swordweld.Part1 = sword
+sword.Touched:connect(function(hit) if hit.Parent:FindFirstChild("Humanoid") ~= nil and debounceforsworddamage == true and damageallowed == true then hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - overalldamage wait(.2) debounceforsworddamage = true else return end end)
+swordweld.C0 = CFrame.new(.3,.6,.6)*CFrame.Angles(math.pi/2,math.rad(-35),0) mesh2sword = Instance.new("SpecialMesh",sword) mesh2sword.MeshType = "FileMesh" mesh2sword.MeshId = "http://www.roblox.com/asset/?id=49754655" mesh2sword.TextureId = "http://www.roblox.com/asset/?id=77571269" mesh2sword.Scale = VC(2,2,2)
+local sword2 = Instance.new("Part",Model) sword2.FormFactor = "Custom" sword2.Size = VC(.5,3.5,.5) sword2.CanCollide = false sword2.CFrame = me.Character.Torso.CFrame swordweld2 = Instance.new("Weld",me.Character.Torso) swordweld2.Part0 = swordweld2.Parent swordweld2.Part1 = sword2
+sword2.Touched:connect(function(hit) if hit.Parent:FindFirstChild("Humanoid") ~= nil and debounceforsworddamage2 == true and damageallowed == true then hit.Parent:FindFirstChild("Humanoid").Health = hit.Parent:FindFirstChild("Humanoid").Health - overalldamage wait(.2) debounceforsworddamage2 = true else return end end)
+swordweld2.C0 = CFrame.new(-.3,.6,.6)*CFrame.Angles(math.pi/2,math.rad(35),0) mesh2sword2 = Instance.new("SpecialMesh",sword2) mesh2sword2.MeshType = "FileMesh" mesh2sword2.MeshId = "http://www.roblox.com/asset/?id=49754655" mesh2sword2.TextureId = "http://www.roblox.com/asset/?id=77571269" mesh2sword2.Scale = VC(2,2,2)
+local shield = Instance.new("Part",Model) shield.FormFactor = "Custom" shield.Size = VC(.5,3.5,.5) shield.CanCollide = false shield.CFrame = me.Character.Torso.CFrame shieldweld = Instance.new("Weld",me.Character.Torso) shieldweld.Part0 = shieldweld.Parent shieldweld.Part1 = shield
+shieldweld.C0 = CFrame.new(0,0,.8)*CFrame.Angles(math.pi/2,0,math.pi/1)  shieldmesh2 = Instance.new("SpecialMesh",shield) shieldmesh2.MeshType = "FileMesh" shieldmesh2.MeshId = "http://www.roblox.com/asset/?id=49757732" shieldmesh2.TextureId = "http://www.roblox.com/asset/?id=77571269" shieldmesh2.Scale = VC(1.2,1.1,1.2)
+end 
+
+function changemode() if modestabiliazer ~= true then return else modestabiliazer = false if MainGui ~= nil then MainGui:Destroy() else end numchangerformodes = numchangerformodes + 1 if numchangerformodes == 4 then numchangerformodes = 1 else end
+MainGui = Instance.new("ScreenGui",me.PlayerGui) local TL = Instance.new("TextLabel",MainGui) TL.Position = UDim2.new(0,630,0,20) TL.Text = TableForModes[numchangerformodes] TL.Size = UDim2.new(0,150,0,50) TL.BackgroundColor3 = BrickColor.new("Really black").Color
+TL.TextColor3 = BrickColor.new("White").Color TL.Font = "ArialBold" TL.FontSize = "Size18" 
+if numchangerformodes == 1 then unequip() mode1 = true mode2 = false mode3 = false equip() else if numchangerformodes == 2 then unequip() mode1 = false mode2 = true mode3 = false equip() else if numchangerformodes == 3 then unequip() mode1 = false mode2 = false mode3 = true equip() end end end if MainGui ~= nil then MainGui:Destroy() end modestabiliazer = true
+end
+end
+
+function equip() if mode1 == true then if debounceequip ~= true or debounceunequip == false then return else  debounceequip = false
+for i = 0,3.8,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end swordweld.Part0 = me.Character:FindFirstChild("Right Arm") swordweld.C0 = CF(.1,-1.2,-2)*CFrame.Angles(math.rad(180),0,math.pi/2)
+for i = 3.8,0,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end
+for i = 0,1,.1 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1-i, 1, -.2, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(i-.3,6.3,i)
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1+i-.2, 0.8, -.2, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(i-.6,5.9,i*-1) wait() end armsMD[1].Part1 = nil holdarmright = Instance.new("Weld",me.Character.Torso) holdarmright.Part0 = holdarmright.Parent holdarmright.Part1 = arms[1] holdarmright.C0 = CFrame.new(.55,.3,-.4)*CFrame.Angles(.9,-.55,-.40) 
+armsMD[2].Part1 = nil holdarmleft = Instance.new("Weld",me.Character.Torso) holdarmleft.Part0 = holdarmleft.Parent holdarmleft.Part1 = arms[2] holdarmleft.C0 = CF(-.8,.2,-.6)*CFrame.Angles(1.2,-.5,.8) 
+for i = 2,3,.1 do mesh2sword.Scale = VC(i,i,i) swordweld.C0 = swordweld.C0*CFrame.new(0,.03,.085) wait() end debounceequip = true end else 
+if mode2 == true then if debounceequip ~= true or debounceunequip == false then return else end debounceequip = false
+for i = 0,3.8,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(-.2,6.3,i*-1)
+wait() end swordweld.Part0 = me.Character:FindFirstChild("Right Arm") swordweld.C0 = CF(.1,-1.2,-2)*CFrame.Angles(math.rad(180),0,math.pi/2)
+swordweld2.Part0 = me.Character:FindFirstChild("Left Arm") swordweld2.C0 = CF(-.1,-1.2,-2)*CFrame.Angles(math.rad(180),0,math.pi/2)
+for i = 3.8,1,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(-.2,6.3,i*-1) wait() end
+armsMD[1].Part1 = nil holdarmright2 = Instance.new("Weld",me.Character.Torso) holdarmright2.Part0 = holdarmright2.Parent holdarmright2.Part1 = arms[1] holdarmright2.C0 = CFrame.new(1.5,.5,-.3)*CFrame.Angles(1.1,.2,0) 
+armsMD[2].Part1 = nil holdarmleft2 = Instance.new("Weld",me.Character.Torso) holdarmleft2.Part0 = holdarmleft2.Parent holdarmleft2.Part1 = arms[2] holdarmleft2.C0 = CF(-1.5,.5,-.3)*CFrame.Angles(1.1,-.2,0) debounceequip = true
+else if mode3 == true then if debounceequip ~= true or debounceunequip == false then return else end debounceequip = false
+for i = 0,3.8,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end swordweld.Part0 = me.Character:FindFirstChild("Right Arm") swordweld.C0 = CF(.1,-1.2,-2)*CFrame.Angles(math.rad(180),0,math.pi/2)
+for i = 3.8,1,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end armsMD[1].Part1 = nil holdarmright3 = Instance.new("Weld",me.Character.Torso) holdarmright3.Part0 = holdarmright3.Parent holdarmright3.Part1 = arms[1] holdarmright3.C0 = CFrame.new(1.5,.5,-.3)*CFrame.Angles(1.1,.2,0) debounceequip = true 
+for i = 0,1,.2 do armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,i*-1) wait() end 
+local orb = Instance.new("Part",Model) orb.Size = Vector3.new(1,1,1) orb.Shape = "Ball" orb.CFrame = CFrame.new(arms[1].CFrame.x,arms[1].CFrame.y,arms[1].CFrame.z) orb.CanCollide = true orb.Reflectance = 1
+local wld = Instance.new("Weld",arms[2]) wld.Part0 = wld.Parent wld.Part1 = orb wld.C0 = CFrame.new(-.1,-1.1,-.1) wait(.2) local f = Instance.new("Fire",orb) f.Color = BrickColor.new("Really black").Color f.SecondaryColor = BrickColor.new("Really black").Color f.Size = 3 f.Heat = 15 for i = 1,5 do f:clone().Parent = orb end
+for i = 1,5,.2 do shieldweld.C0 = CFrame.new(0,i,.8)*CFrame.Angles(math.pi/2,0,math.pi/1) wait() end for i = 0,90,10 do shieldweld.C0 = CFrame.new(0,5,.8)*CFrame.Angles(math.pi/2,0,math.rad(180+i)) wait() end
+for i = 0,2,.1 do shieldweld.C0 = CFrame.new(0-i-.3,5-i-i,.8-i)*CFrame.Angles(math.pi/2,0,math.rad(270)) wait() end orb:Destroy() shieldweld.Part0 = nil shieldweld.Part0 = arms[2] shieldweld.C0 = CFrame.new(-.5,0,0)*CFrame.Angles(0,0,math.pi/-2)
+for i = 0,10,1 do armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = armsMD[2].C0*CFrame.Angles(math.rad(i),0,math.rad(-2))*CFrame.new(0,-.05,0) wait() end armsMD[2].Part1 = nil holdarmleft3 = Instance.new("Weld",me.Character.Torso) holdarmleft3.Part0 = holdarmleft3.Parent holdarmleft3.Part1 = arms[2] holdarmleft3.C0 = CFrame.new(-.6,.2,-.8)*CFrame.Angles(1.3,0,1.4) debounceunequip = true end 
+end end
+end
+
+function unequip()  damageallowed = false if mode1 == true then if debounceunequip ~= true or debounceequip == false then return nil else debounceunequip = false
+for i = 3,2,-.1 do mesh2sword.Scale = VC(i,i,i) swordweld.C0 = swordweld.C0*CFrame.new(0,-.03,-.085) wait() end armsMD[1].Part1 = arms[1] armsMD[2].Part1 = arms[2] holdarmright:Destroy() holdarmleft:Destroy()
+for i = 1,0,-.1 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1-i, 1, -.2, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(i-.3,6.3,i)
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1+i, 0.8, -.2, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(i+.3,6.3,i) wait() end armsMD[2].C0 = CFrame.new(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,0)
+for i = 0,3.8,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end
+swordweld.Part0 = me.Character.Torso swordweld.C0 = CFrame.new(.3,.6,.6)*CFrame.Angles(math.pi/2,math.rad(-35),0)
+for i = 3.8,1,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(0,6.3,i) wait() end armsMD[1].C0 = CFrame.new(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0)*CFrame.Angles(0,6.3,0) debounceunequip = true end
+else if mode2 == true then if debounceunequip ~= true or debounceequip == false then return nil else debounceunequip = false
+armsMD[1].Part1 = arms[1] armsMD[2].Part1 = arms[2] holdarmright2:Destroy() holdarmleft2:Destroy()
+for i = 1,3.8,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(-.2,6.3,i*-1) wait() end 
+swordweld.Part0 = me.Character.Torso swordweld.C0 = CFrame.new(.3,.6,.6)*CFrame.Angles(math.pi/2,math.rad(-35),0) swordweld2.Part0 = me.Character.Torso swordweld2.C0 = CFrame.new(-.3,.6,.6)*CFrame.Angles(math.pi/2,math.rad(35),0)
+for i = 3.8,0,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(0,6.3,i)
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,i*-1) wait() end armsMD[2].C0 = CFrame.new(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,0) debounceunequip = true end
+else if mode3 == true then if debounceunequip ~= true or debounceequip == false then return else end debounceunequip = false
+armsMD[1].Part1 = arms[1] armsMD[2].Part1 = arms[2] holdarmright3:Destroy() holdarmleft3:Destroy()
+for i = 1.2,0,-.1 do shieldmesh2.Scale = VC(i,i,i) wait() end
+for i = 10,0,-1 do armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = armsMD[2].C0*CFrame.Angles(math.rad(i*-1),0,math.rad(-2))*CFrame.new(0,.05,0) wait() end 
+for i = 4,0,-.3 do armsMD[2].C0 = armsMD[2].C0*CFrame.Angles(0,0,math.rad(i)) wait() end armsMD[2].C0 = CFrame.new(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,0)
+for i = 1,3.8,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(-.2,6.3,i) wait() end swordweld.Part0 = me.Character.Torso swordweld.C0 = CFrame.new(.3,.6,.6)*CFrame.Angles(math.pi/2,math.rad(-35),0)
+for i = 3.8,0,-.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(0,6.3,i) wait() end armsMD[2].C0 = CFrame.new(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,0)
+shieldweld.Part0 = shieldweld.Parent shieldweld.C0 = CFrame.new(0,0,.8)*CFrame.Angles(math.pi/2,0,math.pi/1) wait() shieldmesh2.Scale = VC(1.2,1.1,1.2) debounceunequip = true end
+end end 
+end
+
+function firstmove() damageallowed = true
+if mode2 == true then overalldamage = 10 holdarmright2.Part1 = nil armsMD[1].Part1 = arms[1] holdarmleft2.Part1 = nil armsMD[2].Part1 = arms[2]
+local bp = Instance.new("BodyPosition",me.Character.Torso) bp.maxForce = VC(math.huge,math.huge,math.huge) bp.position = (me.Character.Torso.CFrame*CFrame.new(0,.3,-30)).p
+fire = Instance.new("Fire") fire.Size = 3 fire.Heat = 25 fire.Color = BrickColor.new("Teal").Color fire.SecondaryColor = BrickColor.new("Teal").Color for i = 1,5 do fire:clone().Parent = mesh2sword.Parent end for i = 1,5 do fire:clone().Parent = mesh2sword2.Parent end 
+for i = 1,0,-.1 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(i*-1,6.3,i) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(i*-1,6.3,i*-1) wait() end 
+for i = 0,1,.2 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(0,6.3,i)
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,i*-1) wait() end for i,v in pairs(mesh2sword.Parent:GetChildren()) do if v:IsA("Fire") then v:Destroy() else end end for i,v in pairs(mesh2sword2.Parent:GetChildren()) do if v:IsA("Fire") then v:Destroy() else end end wait(.1)
+bp:Destroy() armsMD[1].Part1 = nil holdarmright2.Part1 = arms[1] armsMD[2].Part1 = nil holdarmleft2.Part1 = arms[2] overalldamage = 5  damageallowed = false
+end
+end
+
+function secondmove() damageallowed = true 
+if mode2 == true then me.Character.Humanoid.WalkSpeed = 0 local changingnumnum = 0 local changingnumnum2 = 0 local changingnumnum3 = 0 local p = Instance.new("Part",game.Workspace) p.Anchored = true p.CanCollide = false p.CFrame = me.Character.Torso.CFrame*CFrame.new(0,-2,0) local msh = Instance.new("SpecialMesh",p) msh.MeshType = "FileMesh" msh.MeshId = "http://www.roblox.com/asset/?id=20329976" msh.Scale = Vector3.new(5,3,5) msh.TextureId = "http://www.roblox.com/asset/?id=20329965" msh.VertexColor = Vector3.new(0,0,0)
+holdarmright2.Part1 = nil armsMD[1].Part1 = arms[1] holdarmleft2.Part1 = nil armsMD[2].Part1 = arms[2]
+for i = 0,1,.1 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(i*-1,6.3,0) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(i*-1,6.3,0) wait() end 
+
+
+for i = 180,90,-10 do changingnumnum = changingnumnum + .18 changingnumnum2 = changingnumnum2 - .18 changingnumnum3 = changingnumnum3 + .01 swordweld.C0 = CF(-.1+changingnumnum3,-1.2+changingnumnum2,-2+changingnumnum)*CFrame.Angles(math.rad(i),0,math.pi/2) wait() 
+swordweld2.C0 = CF(-.1+changingnumnum3,-1.2+changingnumnum2,-2+changingnumnum)*CFrame.Angles(math.rad(i),0,math.pi/2) wait() end
+
+for i = 1,200,2 do me.Character.Torso.CFrame = me.Character.Torso.CFrame*CFrame.Angles(0,1,0) wait() end wait(.1) p:Destroy()
+ 
+for i = 90,180,10 do changingnumnum = changingnumnum - .1 changingnumnum2 = changingnumnum2 + .1 changingnumnum3 = changingnumnum3 - .01 swordweld.C0 = CF(-.1+changingnumnum3,-1.2+changingnumnum2,-2+changingnumnum)*CFrame.Angles(math.rad(i),0,math.pi/2) 
+swordweld2.C0 = CF(-.1+changingnumnum3,-1.2+changingnumnum2,-2+changingnumnum)*CFrame.Angles(math.rad(i),0,math.pi/2)wait() end 
+swordweld.C0 = CF(.1,-1.2,-2)*CFrame.Angles(math.rad(180),0,math.pi/2) swordweld2.C0 = CF(-.1,-1.2,-2)*CFrame.Angles(math.rad(180),0,math.pi/2) for i = 1,0,-.1 do armsMD[1].CurrentAngle = 0 armsMD[1].MaxVelocity = 0 armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(i*-1,6.3,0) 
+armsMD[2].CurrentAngle = 0 armsMD[2].MaxVelocity = 0 armsMD[2].C0 = CF(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(i*-1,6.3,0) wait() end armsMD[1].C0 = CF(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0)*CFrame.Angles(0,6.3,0) armsMD[2].C0 = CFrame.new(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)*CFrame.Angles(0,6.3,0)
+armsMD[1].Part1 = nil holdarmright2.Part1 = arms[1] armsMD[2].Part1 = nil holdarmleft2.Part1 = arms[2] damageallowed = false me.Character.Humanoid.WalkSpeed = 16
+end
+end 
+
+function sel(mouse)
+equip()
+mouse.Button1Down:connect(slash)
+mouse.keyDown:connect(function(key) if key == "z" then equip() end end)
+mouse.keyDown:connect(function(key) if key == "x" then changemode() end end)
+mouse.keyDown:connect(function(key) if key == "q" then firstmove() end end)
+mouse.keyDown:connect(function(key) if key == "e" then secondmove() end end)
+end
+
+function deSel() 
+unequip()
+end
+
+hop.Deselected:connect(deSel)
+hop.Selected:connect(sel)
+armor()

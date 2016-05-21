@@ -1,0 +1,1279 @@
+Plrs = game:GetService("Players")
+
+me = Plrs.InfiniteExploitz<---------
+
+char = me.Character
+
+Modelname = "SoulKarate"
+
+dmgs = {Pdmg = {7, 13, "Punch"}, Kdmg = {10, 19, "Kick"}, K2dmg = {12, 16, "Doublekick"}, Rdmg = {16, 23, "RoundHouse"},
+
+Kardmg = {8, 15, "Karate"}}
+
+dmg = dmgs.Pdmg
+
+Surfaces = {"FrontSurface", "BackSurface", "TopSurface", "BottomSurface", "LeftSurface", "RightSurface"}
+
+necko = CFrame.new(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0) 
+
+able = true
+
+block = false
+
+breakblock = 19
+
+holdkey = false
+
+effectOn = false
+
+Add = {
+
+Sphere = function(P)
+
+local m = Instance.new("SpecialMesh",P)
+
+m.MeshType = "Sphere"
+
+return m
+
+end,
+
+BF = function(P)
+
+local bf = Instance.new("BodyForce",P)
+
+bf.force = Vector3.new(0, P:GetMass()*187, 0)
+
+return bf
+
+end,
+
+BP = function(P)
+
+local bp = Instance.new("BodyPosition",P)
+
+bp.maxForce = Vector3.new(math.huge, 0, math.huge)
+
+bp.P = 14000
+
+return bp
+
+end,
+
+BG = function(P)
+
+local bg = Instance.new("BodyGyro",P)
+
+bg.maxTorque = Vector3.new(math.huge, math.huge, math.huge)
+
+bg.P = 14000
+
+return bg
+
+end
+
+}
+
+function Part(Parent, Anchor, Collide, Tran, Ref, Color, X, Y, Z, Break)
+
+local p = Instance.new("Part")
+
+p.formFactor = "Custom"
+
+p.Anchored = Anchor
+
+p.CanCollide = Collide
+
+p.Transparency = Tran
+
+p.Reflectance = Ref
+
+p.BrickColor = BrickColor.new(Color)
+
+for _, Surf in pairs(Surfaces) do
+
+p[Surf] = "Smooth"
+
+end
+
+p.Size = Vector3.new(X, Y, Z)
+
+if Break then
+
+p:BreakJoints()
+
+else p:MakeJoints() end
+
+p.Parent = Parent
+
+return p
+
+end
+
+function Weld(p0, p1, x, y, z, a, b, c)
+
+local w = Instance.new("Weld")
+
+w.Parent = p0
+
+w.Part0 = p0
+
+w.Part1 = p1
+
+w.C1 = CFrame.new(x,y,z) * CFrame.Angles(a,b,c)
+
+return w
+
+end
+
+function ComputePos(pos1, pos2)
+
+local pos3 = Vector3.new(pos2.x, pos1.y, pos2.z)
+
+return CFrame.new(pos1, pos3)
+
+end
+
+function getHumanoid(c)
+
+local h = nil
+
+for i,v in pairs(c:children()) do
+
+if v:IsA("Humanoid") and c ~= char then
+
+if v.Health > 0 then
+
+h = v
+
+end
+
+end
+
+end
+
+return h
+
+end
+
+function getHead(c, pos, m)
+
+local h = nil
+
+local n = nil
+
+t = c:findFirstChild("Torso")
+
+if t ~= nil then
+
+n = t:findFirstChild("Neck")
+
+end
+
+for i,v in pairs(c:children()) do
+
+if v.Name == "Head" then
+
+if (v.Position - pos).magnitude < m then
+
+h = v
+
+end
+
+end
+
+end
+
+return h, n
+
+end
+
+for i,v in pairs(char:children()) do
+
+if v.Name == Modelname then
+
+v:remove()
+
+end
+
+end
+
+torso = char.Torso
+
+neck = torso.Neck
+
+hum = char.Humanoid
+
+Rarm = char["Right Arm"]
+
+Larm = char["Left Arm"]
+
+Rleg = char["Right Leg"]
+
+Lleg = char["Left Leg"]
+
+LastHP = hum.Health
+
+function HpChange(newhp)
+
+if block and hum.Health > 0.1 then
+
+local dif = LastHP - newhp
+
+if dif > 0 then
+
+local h = LastHP - ((LastHP-newhp)/3)
+
+hum.Health = h
+
+wait()
+
+hum.Health = h
+
+end
+
+if dif > breakblock then
+
+block = false
+
+local a = Add.BP(torso)
+
+a.position = torso.Position
+
+local b = Add.BG(torso)
+
+b.cframe = CFrame.new(torso.Position, torso.CFrame * CFrame.new(0, 0, -5).p)
+
+wait(0.6)
+
+a:remove()
+
+b:remove()
+
+able = true
+
+end
+
+end
+
+LastHP = hum.Health
+
+end
+
+hum.HealthChanged:connect(HpChange)
+
+hc = Instance.new("Humanoid")
+
+hc.Health = 0
+
+hc.MaxHealth = 0
+
+slash = Instance.new("Sound")
+
+slash.SoundId = "rbxasset://sounds//swordslash.wav"
+
+slash.Volume = 0.8
+
+slash.Pitch = 1.4
+
+slash.Parent = Rarm
+
+hitsound = Instance.new("Sound")
+
+hitsound.SoundId = "http://www.roblox.com/asset/?id=2801263"
+
+hitsound.Volume = 0.55
+
+hitsound.Pitch = 2.1
+
+hitsound.Parent = torso
+
+Mo = Instance.new("Model")
+
+Mo.Name = Modelname
+
+RABrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+LABrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+RLBrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+LLBrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+RABW = Weld(torso, RABrick, -1.5, -0.5, 0, 0, 0, 0)
+
+LABW = Weld(torso, LABrick, 1.5, -0.5, 0, 0, 0, 0)
+
+RLBW = Weld(torso, RLBrick, -0.5, 1.2, 0, 0, 0, 0)
+
+LLBW = Weld(torso, LLBrick, 0.5, 1.2, 0, 0, 0, 0)
+
+RAW = Weld(RABrick, nil, 0, 0.5, 0, 0, 0, 0)
+
+LAW = Weld(LABrick, nil, 0, 0.5, 0, 0, 0, 0)
+
+RLW = Weld(RLBrick, nil, 0, 0.8, 0, 0, 0, 0)
+
+LLW = Weld(LLBrick, nil, 0, 0.8, 0, 0, 0, 0)
+
+TBricks = {}
+
+for i, v in pairs({Rarm, Larm, Rleg, Lleg}) do
+
+local p = Part(Mo, false, false, 1, 0, "White", 0.9, 0.9, 0.8, true)
+
+Weld(v, p, 0, 0.7, 0, 0, 0, 0)
+
+table.insert(TBricks, {p, hurt = false, able = true})
+
+end
+
+function startEff(part)
+
+effectOn = true
+
+local lastPoint = part.Position
+
+coroutine.resume(coroutine.create(function()
+
+while effectOn do
+
+wait()
+
+local mag = (lastPoint - part.Position).magnitude
+
+local p = Part(Mo, true, false, 0.2, 0.05, "Institutional white", 0.1, 0.1, mag+0.2, true)
+
+p.CFrame = CFrame.new(lastPoint, part.Position) * CFrame.new(0, 0, -mag/2)
+
+Instance.new("BlockMesh",p)
+
+lastPoint = part.Position
+
+coroutine.resume(coroutine.create(function()
+
+for x=0.2,1,0.2 do
+
+wait()
+
+p.Transparency = x
+
+end
+
+p:remove()
+
+end))
+
+end
+
+end))
+
+end
+
+function endEff()
+
+effectOn = false
+
+end
+
+function ShowDMG(p, d)
+
+local mo = Instance.new("Model")
+
+mo.Name = d
+
+local pa = Part(mo, false, true, 0, 0, "Bright red", 0.8, 0.2, 0.8, true)
+
+pa.CFrame = CFrame.new(p.Position)
+
+pa.Name = "Head"
+
+local hah = hc:clone()
+
+hah.Parent = mo
+
+local bp = Add.BP(pa)
+
+bp.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+
+bp.position = p.Position + Vector3.new(0, 2.5, 0)
+
+Add.BG(pa)
+
+coroutine.resume(coroutine.create(function()
+
+wait(0.2)
+
+mo.Parent = workspace
+
+wait(1.5)
+
+mo:remove()
+
+end))
+
+end
+
+for i, v in pairs(TBricks) do
+
+v[1].Touched:connect(function(hit)
+
+local fig = hit.Parent
+
+H, T = getHumanoid(fig), fig:findFirstChild("Torso")
+
+if H ~= nil and T ~= nil and v.hurt and v.able then
+
+hitsound:play()
+
+v.able = false
+
+local d = math.random(dmg[1], dmg[2])
+
+local hed, ne = getHead(fig, v[1].Position, 2.5)
+
+if dmg[3] == "RoundHouse" and hed ~= nil then
+
+d = math.random(dmg[1]*2.4, dmg[2]*2.4)
+
+coroutine.resume(coroutine.create(function()
+
+if ne ~= nil then
+
+for i=0,60,20 do
+
+ne.C0 = necko * CFrame.Angles(math.rad(-i), 0, 0)
+
+wait()
+
+end
+
+for i=60,0,-20 do
+
+ne.C0 = necko * CFrame.Angles(math.rad(-i), 0, 0)
+
+wait()
+
+end
+
+ne.C0 = necko
+
+end
+
+end))
+
+end
+
+H.Health = H.Health - d
+
+local xd = CFrame.new(v[1].Position, hit.Position)
+
+hit.Velocity = xd.lookVector * (d*2.3)
+
+ShowDMG(v[1], d)
+
+wait(0.34)
+
+v.able = true
+
+end
+
+end)
+
+end
+
+Mo.Parent = char
+
+RAWBattle = nil
+
+LAWBattle = nil
+
+function nilparts()
+
+LAW.Part1 = nil
+
+RAW.Part1 = nil
+
+RLW.Part1 = nil
+
+LLW.Part1 = nil
+
+LAW.C0 = CFrame.new(0, 0, 0)
+
+RLW.C0 = CFrame.new(0, 0, 0)
+
+LLW.C0 = CFrame.new(0, 0, 0)
+
+RAW.C0 = CFrame.new(0, 0, 0)
+
+end
+
+function attach()
+
+LAW.Part1 = Larm
+
+RLW.Part1 = Rleg
+
+LLW.Part1 = Lleg
+
+RAW.Part1 = Rarm
+
+LAW.C0 = CFrame.new(0, 0, 0)
+
+RLW.C0 = CFrame.new(0, 0, 0)
+
+LLW.C0 = CFrame.new(0, 0, 0)
+
+RAW.C0 = CFrame.new(0, 0, 0)
+
+end
+
+attacks = {
+
+function(mouse)
+
+local Orig = torso.CFrame
+
+local MousePos = mouse.Hit.p
+
+local bg = Add.BG(torso)
+
+local bp = Add.BP(torso)
+
+bp.position = Orig.p
+
+local CF = ComputePos(Orig.p, MousePos)
+
+local CF2 = CF
+
+bg.cframe = CF2
+
+attach()
+
+bp.position = CF * CFrame.new(0, 0, -1.5).p
+
+startEff(TBricks[3][1])
+
+TBricks[3].hurt = true
+
+slash:play()
+
+dmg = dmgs.Kdmg
+
+for i = 0, 100, 100/4 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(i)) * CFrame.new(0, -i/200, 0)
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(-i/4))
+
+RAW.C0 = CFrame.Angles(math.rad(i/8), 0, math.rad(-i/7))
+
+LAW.C0 = CFrame.Angles(math.rad(i/6), 0, math.rad(-i/7))
+
+CF2 = CF * CFrame.Angles(math.rad(i/4), math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+wait(0.1)
+
+TBricks[3].hurt = false
+
+for i = 100, 0, -100/5 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(i)) * CFrame.new(0, -i/150, 0)
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(-i/4))
+
+RAW.C0 = CFrame.Angles(math.rad(i/8), 0, math.rad(-i/7))
+
+LAW.C0 = CFrame.Angles(math.rad(i/8), 0, math.rad(-i/7))
+
+CF2 = CF * CFrame.Angles(math.rad(i/4), math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+endEff()
+
+wait()
+
+nilparts()
+
+bg:remove()
+
+bp:remove()
+
+neck.C0 = necko
+
+end,
+
+function(mouse)
+
+local Orig = torso.CFrame
+
+local MousePos = mouse.Hit.p
+
+local bg = Add.BG(torso)
+
+local bp = Add.BP(torso)
+
+bp.position = Orig.p
+
+local CF = ComputePos(Orig.p, MousePos)
+
+local CF2 = CF
+
+bg.cframe = CF2
+
+attach()
+
+bp.position = CF * CFrame.new(0, 0, -1.5).p
+
+TBricks[2].hurt = true
+
+startEff(TBricks[2][1])
+
+slash:play()
+
+dmg = dmgs.Pdmg
+
+for i = 0, -90, -90/4 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(-i/4))
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(i/4))
+
+RAW.C0 = CFrame.Angles(0, 0, 0)
+
+LAW.C0 = CFrame.Angles(math.rad(-i), 0, math.rad(i))
+
+CF2 = CF * CFrame.Angles(math.rad(i/8), math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+wait(0.07)
+
+TBricks[2].hurt = false
+
+endEff()
+
+startEff(TBricks[1][1])
+
+TBricks[1].hurt = true
+
+bp.position = CF * CFrame.new(0, 0, -3).p
+
+slash:play()
+
+for i = -90, 0, 90/7 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-(i*2+90)))
+
+RAW.C0 = CFrame.Angles(math.rad(i-90), math.pi, math.rad(i-90))
+
+LAW.C0 = CFrame.Angles(math.rad(-i), 0, math.rad(i))
+
+CF2 = CF * CFrame.Angles(math.rad(i/8), math.rad(i*2+90), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+wait(0.07)
+
+TBricks[1].hurt = false
+
+for i = 0, -90, -90/5 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-(i+90)))
+
+RAW.C0 = CFrame.Angles(math.rad(i-90), math.pi, math.rad(i-90))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(i/4+23))
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(-i/4-23))
+
+CF2 = CF * CFrame.Angles(0, math.rad(i+90), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+endEff()
+
+wait()
+
+nilparts()
+
+bg:remove()
+
+bp:remove()
+
+neck.C0 = necko
+
+end,
+
+function(mouse)
+
+local Orig = torso.CFrame
+
+local MousePos = mouse.Hit.p
+
+local bg = Add.BG(torso)
+
+local bp = Add.BP(torso)
+
+bp.position = Orig.p
+
+local CF = ComputePos(Orig.p, MousePos)
+
+local CF2 = CF
+
+bg.cframe = CF2
+
+attach()
+
+bp.position = CF * CFrame.new(0, 0, -1.5).p
+
+TBricks[4].hurt = true
+
+startEff(TBricks[4][1])
+
+slash:play()
+
+dmg = dmgs.K2dmg
+
+for i = 0, -100, -100/4 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(-i/4))
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(i))
+
+RAW.C0 = CFrame.Angles(math.rad(-i/6), 0, math.rad(-i/7))
+
+LAW.C0 = CFrame.Angles(math.rad(i/6), 0, math.rad(-i/7))
+
+CF2 = CF * CFrame.Angles(math.rad(-i/5), math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+wait(0.1)
+
+bp.position = CF * CFrame.new(0, 0, -3).p
+
+TBricks[4].hurt = false
+
+endEff()
+
+startEff(TBricks[3][1])
+
+TBricks[3].hurt = true
+
+local lol1, lol2 = RLW.C0, LLW.C0
+
+slash:play()
+
+for i = -100, -290, -190/5 do
+
+RLW.C0 = lol1 * CFrame.Angles(0, 0, math.rad(-i/3-(100/4)))
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad((-i/3)-100))
+
+CF2 = CF * CFrame.Angles(math.rad(100/5), math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+wait(0.1)
+
+bp.position = CF * CFrame.new(0, 0, -4.5).p
+
+TBricks[3].hurt = false
+
+lol1, lol2 = RLW.C0, LLW.C0
+
+for i = 0, -70, -70/3 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad((i*1.3)+100))
+
+RLW.C0 = lol1 * CFrame.Angles(0, 0, math.rad(i*1.4))
+
+LLW.C0 = lol2 * CFrame.Angles(0, 0, 0)
+
+RAW.C0 = CFrame.Angles(0, 0, 0)
+
+LAW.C0 = CFrame.Angles(0, 0, 0)
+
+CF2 = CF * CFrame.Angles(0, math.rad(-290+i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+endEff()
+
+wait()
+
+nilparts()
+
+bg:remove()
+
+bp:remove()
+
+neck.C0 = necko
+
+end,
+
+function(mouse)
+
+if mouse ~= nil then
+
+local Orig = torso.CFrame
+
+local MousePos = mouse.Hit.p
+
+local bg = Add.BG(torso)
+
+local bp = Add.BP(torso)
+
+bp.position = Orig.p
+
+local CF = ComputePos(Orig.p, MousePos)
+
+local CF2 = CF
+
+bg.cframe = CF2
+
+startEff(TBricks[3][1])
+
+attach()
+
+bp.position = CF * CFrame.new(0, 0, -1).p
+
+dmg = dmgs.Rdmg
+
+for i = 0, 180, 180/7 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(i/2))
+
+RLW.C0 = CFrame.Angles(0, 0, 0)
+
+LLW.C0 = CFrame.Angles(0, 0, 0)
+
+RAW.C0 = CFrame.Angles(math.rad(i/5), 0, math.rad(i/10))
+
+LAW.C0 = CFrame.Angles(math.rad(-i/5), 0, math.rad(-i/10))
+
+CF2 = CF * CFrame.Angles(math.rad(i/5.8), math.rad(-i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+slash:play()
+
+TBricks[3].hurt = true
+
+for i = 180, 180+90, 90/4 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad((-i*2-180)-90))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad((i*1.45)-(180*1.45))) * CFrame.new(0, (-i+180)/100, 0)
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad((-i/3)+(180/3)))
+
+RAW.C0 = CFrame.Angles(math.rad(i/5), 0, math.rad(i/10))
+
+LAW.C0 = CFrame.Angles(math.rad(-i/5), 0, math.rad(-i/10))
+
+CF2 = CF * CFrame.Angles(math.rad(180/5.8), math.rad(-i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+TBricks[3].hurt = false
+
+wait()
+
+for i = 270, 360, 90/5 do
+
+local a = i-270
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(i))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad((-a*1.1)-(180*1.45))) * CFrame.new(0, (a/100)+((-270+180)/100), 0)
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad((a/3)-(90/3)))
+
+RAW.C0 = CFrame.Angles(math.rad(270/5-((a*3)/5)), 0, math.rad(270/10-((a*3)/10)))
+
+LAW.C0 = CFrame.Angles(math.rad(-270/5+((a*3)/5)), 0, math.rad(-270/10+((a*3)/10)))
+
+CF2 = CF * CFrame.Angles(math.rad((180/5.8)-((a*2)/5.8)), math.rad(-i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+endEff()
+
+wait()
+
+nilparts()
+
+bg:remove()
+
+bp:remove()
+
+neck.C0 = necko
+
+end
+
+end,
+
+function(mouse)
+
+local Orig = torso.CFrame
+
+local MousePos = mouse.Hit.p
+
+local bg = Add.BG(torso)
+
+local bp = Add.BP(torso)
+
+bp.position = Orig.p
+
+local CF = ComputePos(Orig.p, MousePos)
+
+local CF2 = CF
+
+bg.cframe = CF2
+
+startEff(TBricks[2][1])
+
+attach()
+
+bp.position = CF * CFrame.new(0, 0, -0.8).p
+
+dmg = dmgs.Kardmg
+
+for i = 0, -45, -45/3 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(-i/4))
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(i/4))
+
+RAW.C0 = CFrame.Angles(0, 0, math.rad(-i/3))
+
+LAW.C0 = CFrame.Angles(math.rad(-i*4), 0, 0)
+
+CF2 = CF * CFrame.Angles(0, math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+TBricks[2].hurt = true
+
+bp.position = CF * CFrame.new(0, 0, -1.6).p
+
+slash:play()
+
+for i = -45, -110, -65/3 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+LAW.C0 = CFrame.Angles(math.rad(-45*4), 0, math.rad((i*2+110)))
+
+CF2 = CF * CFrame.Angles(0, math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+wait()
+
+TBricks[2].hurt = false
+
+for i = -110, 0, 110/4 do
+
+neck.C0 = necko * CFrame.Angles(0, 0, math.rad(-i))
+
+LAW.C0 = CFrame.Angles(0, 0, math.rad(i) )
+
+RAW.C0 = CFrame.Angles(0, 0, math.rad(-i/2/3))
+
+RLW.C0 = CFrame.Angles(0, 0, math.rad(45/4-(((i/2)+45)/4)))
+
+LLW.C0 = CFrame.Angles(0, 0, math.rad(45/4+(((i/2)-45)/4)))
+
+CF2 = CF * CFrame.Angles(0, math.rad(i), 0)
+
+bg.cframe = CF2
+
+wait()
+
+end
+
+endEff()
+
+wait()
+
+nilparts()
+
+bg:remove()
+
+bp:remove()
+
+neck.C0 = necko
+
+end
+
+}
+
+bloc = function(mouse)
+
+local hold = true
+
+local bg = Add.BG(nil)
+
+attach()
+
+RLW.Part1 = nil
+
+LLW.Part1 = nil
+
+slash:play()
+
+local duh = true
+
+block = true
+
+mouse.KeyUp:connect(function(k)
+
+k = k:lower()
+
+if duh == true and k == "t" then
+
+block = false
+
+duh = false
+
+hold = false
+
+end
+
+end)
+
+coroutine.resume(coroutine.create(function()
+
+for i = 0, 90, 90/7 do
+
+RAW.C0 = CFrame.new(-i/150, 0, -i/170) * CFrame.Angles(math.rad(i/1.1), 0, math.rad(-i/1.2))
+
+LAW.C0 = CFrame.new(i/150, 0, -i/170) * CFrame.Angles(math.rad(i*1.25), 0, math.rad(i/1.5))
+
+wait()
+
+end
+
+end))
+
+bg.Parent = torso
+
+while block and hold do
+
+wait()
+
+bg.cframe = ComputePos(torso.Position, mouse.Hit.p)
+
+end
+
+for i = 90, 0, -90/7 do
+
+RAW.C0 = CFrame.new(-i/150, 0, -i/170) * CFrame.Angles(math.rad(i/1.1), 0, math.rad(-i/1.2))
+
+LAW.C0 = CFrame.new(i/150, 0, -i/170) * CFrame.Angles(math.rad(i*1.25), 0, math.rad(i/1.5))
+
+wait()
+
+end
+
+nilparts()
+
+bg:remove()
+
+neck.C0 = necko
+
+end
+
+function select(mouse)
+
+mouse.Button1Down:connect(function()
+
+if able then
+
+able = false
+
+attacks[1](mouse)
+
+attacks[2](mouse)
+
+attacks[3](mouse)
+
+attacks[4](mouse)
+
+attacks[5](mouse)
+
+able = true
+
+end
+
+end)
+
+mouse.KeyDown:connect(function(key)
+
+key = key:lower()
+
+if able then
+
+if key == "q" then
+
+able = false
+
+attacks[2](mouse)
+
+able = true
+
+elseif key == "e" then
+
+able = false
+
+attacks[1](mouse)
+
+able = true
+
+elseif key == "r" then
+
+able = false
+
+attacks[3](mouse)
+
+able = true
+
+elseif key == "f" then
+
+able = false
+
+attacks[4](mouse)
+
+able = true
+
+elseif key == "g" then
+
+able = false
+
+attacks[5](mouse)
+
+able = true
+
+elseif key == "t" then
+
+able = false
+
+bloc(mouse)
+
+able = true
+
+elseif key == "z" then
+
+able = false
+
+holdkey = true
+
+while holdkey do
+
+attacks[math.random(1,#attacks)](mouse)
+
+end
+
+able = true
+
+end
+
+end
+
+end)
+
+mouse.KeyUp:connect(function(key)
+
+key = key:lower()
+
+if key == "z" then
+
+holdkey = false
+
+end
+
+end)
+
+end
+
+if script.Parent.className ~= "HopperBin" then
+
+h = Instance.new("HopperBin",me.Backpack)
+
+h.Name = "Karate"
+
+script.Parent = h
+
+end
+
+bin = script.Parent
+
+bin.Selected:connect(select)

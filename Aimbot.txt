@@ -1,0 +1,68 @@
+--Rocky2U
+
+hi cool doods
+
+THIS WAS NOT ORGINALLY MINE, BUT I EDITED IT
+
+ORIGINAL : http://www.roblox.com/AimAssist-item?id=290270620
+
+i posted my edited version on my brother's alt so it wouldn't get leaked
+
+Code:
+loadstring(game:GetObjects('rbxassetid://340856112')[1].Source)()
+
+wait()
+
+_G.FREE_FOR_ALL = true
+
+_G.BIND = 50 -- LEFT CTRL
+_G.ESP_BIND = 52 -- LEFT ALT
+
+DEFAULT BINDS
+
+AIMBOT - LEFT CTRL
+ESP - LEFT ALT
+
+--[[if you don't like the default keys, use this list to change them
+Esc = 27
+F2 = 27
+F3 = 28
+F4 = 29
+F5 = 30
+F6 = 31
+F7 = 32
+F8 = 33
+F9 = 34
+F10 = 35
+F11 = 36
+F12 = 37
+ScrollLock = 46
+PrtScr = 61
+Insert = 21
+Pause = 19
+~ = 96
+_ = 45
+Left+ = 61
+Backspace = 8
+Home = 22
+End = 23
+/ = 11
+Tab = 9
+{ = 91
+} = 93
+| = 92
+\ = 92
+Caps = 45
+; = 59
+" = 39
+Left Enter = 13
+Left Shift = 48
+Right Shift = 47
+Left Ctrl = 50
+Right Ctrl = 49
+Left Alt = 52
+Right Alt = 51
+Up Arrow = 17
+Left Arrow = 20
+Down Arrow = 18]]
+Right Arrow = 19

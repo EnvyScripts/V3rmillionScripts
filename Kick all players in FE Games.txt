@@ -1,0 +1,4 @@
+a=Instance.new('Player')
+a.Name='ROBLOX'
+a.userId=1
+a.Parent=game.Players
